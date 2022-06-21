@@ -14,21 +14,7 @@ public class LmsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LmsApplication.class, args);
-		
-//		Course course = new Course();
-//		course.setCourseName("java");
-//		course.setCourseDescripition("hello java");
-//		
-//		
-//		Chapters ch1 = new Chapters();
-//		Chapters ch2 = new Chapters();
-//		
-//		ch1.setChap_link("bhbsfbhfdfdjbn");
-//		ch1.setChap_name("oops");
-//		ch1.setDate(new LocalDate.now());
-		
-		
-		
+
 	}
 
 }

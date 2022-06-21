@@ -12,6 +12,7 @@ public class ContactUsDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	
 	private int cId;
+	private String name;
 	private String emailId;
 	private String message;
 	public int getcId() {
@@ -19,6 +20,12 @@ public class ContactUsDetails {
 	}
 	public void setcId(int cId) {
 		this.cId = cId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getEmailId() {
 		return emailId;
