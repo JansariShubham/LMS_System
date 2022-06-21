@@ -21,7 +21,7 @@ public class ChaptersController {
 	@Autowired
 	private ChapterService chapterService;
 
-	@PostMapping("/addChapters")
+	@PostMapping("/chapters")
 	public Chapters saveChapters(@RequestBody Chapters chapter)
 	{
 		 return chapterService.saveChapters(chapter);
@@ -29,31 +29,31 @@ public class ChaptersController {
 			
 	}
 	
-	@GetMapping("/getChapters")
+	@GetMapping("/chapters")
 	public List<Chapters> getCourse()
 	{
 		return chapterService.getChapters();
 	}
 	
-	@GetMapping("/getChapter/{chapterId}")
+	@GetMapping("/chapters/{chapterId}")
 	public Chapters getChapter(@PathVariable int chapterId)
 	{
 		return chapterService.getChapter(chapterId);
 	}
 	
-	@GetMapping("/getChapterByName/{chapterName}")
+	@GetMapping("/chapters/{chapterName}")
 	public Chapters getChapterByName(@PathVariable String chapterName)
 	{
 		return chapterService.getChapterByName(chapterName);
 	}
 	
-	@PutMapping("/updateChapter")
+	@PutMapping("/chapters")
 	public Chapters updateCourse(@RequestBody Chapters chapter)
 	{
 		return chapterService.updateChapter(chapter);
 	}
 	
-	@DeleteMapping("/deleteChapter/{chapterId}")
+	@DeleteMapping("/chapters/{chapterId}")
 	public String deleteChapter(@PathVariable int chapterId)
 	{
 			return chapterService.deleteChapter(chapterId);

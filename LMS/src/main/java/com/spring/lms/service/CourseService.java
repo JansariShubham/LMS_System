@@ -32,10 +32,10 @@ public class CourseService {
 		return courseRepo.findById(courseId).orElse(null);
 	}
 
-	public Course getCourseByName(String courseName) {
-		// TODO Auto-generated method stub
-		return courseRepo.findBycourseName(courseName);
-	}
+//	public Course getCourseByName(String courseName) {
+//		// TODO Auto-generated method stub
+//		return courseRepo.findBycourseName(courseName);
+//	}
 
 	public Course updateCourse(Course course) {
 		// TODO Auto-generated method stub

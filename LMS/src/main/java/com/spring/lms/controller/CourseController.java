@@ -22,7 +22,7 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 	
-	@PostMapping("/addCourse")
+	@PostMapping("/course")
 	public Course saveCourse(@RequestBody Course course)
 	{
 		 return courseService.saveCourse(course);
@@ -31,31 +31,31 @@ public class CourseController {
 	}
 	
 	
-	@GetMapping("/getCourses")
+	@GetMapping("/course")
 	public List<Course> getCourse()
 	{
 		return courseService.getCourses();
 	}
 	
-	@GetMapping("/getCourse/{courseId}")
+	@GetMapping("/course/{courseId}")
 	public Course getCourse(@PathVariable int courseId)
 	{
 		return courseService.getCourse(courseId);
 	}
 	
-	@GetMapping("/getCourseByName/{courseName}")
-	public Course getCourseByName(@PathVariable String courseName)
-	{
-		return courseService.getCourseByName(courseName);
-	}
+//	@GetMapping("/course/{courseName}")
+//	public Course getCourseByName(@PathVariable String courseName)
+//	{
+//		return courseService.getCourseByName(courseName);
+//	}
 	
-	@PutMapping("/updateCourse")
+	@PutMapping("/course")
 	public Course updateCourse(@RequestBody Course course)
 	{
 		return courseService.updateCourse(course);
 	}
 	
-	@DeleteMapping("/deleteCourse/{courseId}")
+	@DeleteMapping("/course/{courseId}")
 	public String deleteCourse(@PathVariable int courseId)
 	{
 			return courseService.deleteCourse(courseId);
