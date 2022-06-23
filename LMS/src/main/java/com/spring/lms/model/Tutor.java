@@ -1,9 +1,12 @@
 package com.spring.lms.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Tutor {
@@ -17,6 +20,9 @@ public class Tutor {
 	private String phoneNo;
 	private String password;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_fk")
+	private User user;
 	
 	public int getTutor_id() {
 		return tutor_id;

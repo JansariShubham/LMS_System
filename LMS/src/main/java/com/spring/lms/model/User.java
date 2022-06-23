@@ -1,11 +1,12 @@
 package com.spring.lms.model;
 
-import javax.persistence.Column;
+//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -13,31 +14,19 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int user_id;
 	
-	@Column(nullable = false)
 	private String firstName;
-	
-	@Column(nullable = false)
 	private String lastName;
-	
-	@Column(unique = true)
 	private String emailId;
-	
-	@Column(nullable = false)
 	private String password;
+	private String role;
 	
-	@Column(nullable = false)
-	private byte role;
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "tutor_fk")
+//	private Tutor tutor;
 	
-	@Column(nullable = true)
-	private String phone;
-	
-	public String getPhone() {
-		return phone;
+	public int getUser_id() {
+		return user_id;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
@@ -66,12 +55,15 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public byte isRole() {
-		return role;
-	}
-	public void setRole(byte role) {
+	
+	public void setRole(String role) {
 		this.role = role;
 	}
+	public String getRole() {
+		return role;
+	}
+	
+	
 	
 	
 

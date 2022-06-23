@@ -22,6 +22,8 @@ public class Course {
 	@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_fk" , referencedColumnName = "courseId")
 	private List<Chapters> chapters;
+	
+	
 
 	public List<Chapters> getChapters() {
 		return chapters;
