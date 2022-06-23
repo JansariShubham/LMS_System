@@ -10,7 +10,7 @@ import com.spring.lms.model.User;
 import com.spring.lms.service.UserService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class RegistrationController {
 			
 	@Autowired
@@ -20,7 +20,6 @@ public class RegistrationController {
 	@PostMapping("/register")
 	public User register(@RequestBody User user)
 	{
-		
 		return userService.signUp(user);
 	}
 	
