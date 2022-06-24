@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.lms.model.ContactDetails;
 import com.spring.lms.model.Contact;
-import com.spring.lms.service.ContactUsDetailsService;
+import com.spring.lms.service.ContactService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class ContactController {
 	
 	@Autowired
-	private ContactUsDetailsService conatctUsDeatilsService;
+	private ContactService contactService;
 	
 	@PostMapping("/contact")
 	public Contact save( @RequestBody Contact contactUs)
 	{
-		return conatctUsDeatilsService.add(contactUs);
+		return contactService.add(contactUs);
 	}
 	
 	@GetMapping("/contact")
 	public List<Contact> getDetails()
 	{
-		return conatctUsDeatilsService.getDetails();
+		return contactService.getDetails();
 	}
 
 }

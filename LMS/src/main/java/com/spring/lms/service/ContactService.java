@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.lms.model.Contact;
-import com.spring.lms.repository.ContactUsDetailsRepo;
+import com.spring.lms.repository.ContactRepo;
 
 @Service
-public class ContactUsDetailsService {
+public class ContactService {
 	
 	@Autowired
-	private ContactUsDetailsRepo contactDetailsRepo;
+	private ContactRepo contactRepo;
 
 	public Contact add(Contact contactUs) {
 		// TODO Auto-generated method stub
-		return contactDetailsRepo.save(contactUs);
+		return contactRepo.save(contactUs);
 	}
 
 	public List<Contact> getDetails() {
 		// TODO Auto-generated method stub
-		return contactDetailsRepo.findAll();
+		return contactRepo.findAll();
 	}
 
 }

@@ -6,33 +6,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.lms.model.ContactDetails;
-import com.spring.lms.repository.ContactUsRepo;
+import com.spring.lms.repository.ContactDetailsRepo;
 
 @Service
-public class ContactUsService {
+public class ContactDetailsService {
 	
 	@Autowired
-	private ContactUsRepo contactUsRepo;
+	private ContactDetailsRepo contactDetailsRepo;
 
 	public ContactDetails addData(ContactDetails contactus) {
 		// TODO Auto-generated method stub
-		return contactUsRepo.save(contactus);
+		return contactDetailsRepo.save(contactus);
 	}
 
 	public ContactDetails updateData(ContactDetails contactus) {
 		// TODO Auto-generated method stub
 		
-		ContactDetails exisitingData=contactUsRepo.findById(contactus.getcId()).orElse(null);
+		ContactDetails exisitingData=contactDetailsRepo.findById(contactus.getcId()).orElse(null);
 		exisitingData.setEmailId(contactus.getEmailId());
 		exisitingData.setPhoneNumber(contactus.getPhoneNumber());
 		exisitingData.setAddress(contactus.getAddress());
 		
-		return contactUsRepo.save(exisitingData) ;
+		return contactDetailsRepo.save(exisitingData) ;
 	}
 
 	public List<ContactDetails> getData() {
 		// TODO Auto-generated method stub
-		return contactUsRepo.findAll();
+		return contactDetailsRepo.findAll();
 	}
 
 }
