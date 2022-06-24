@@ -58,6 +58,7 @@ public class UserService {
 		existingUser.setEmailId(user.getEmailId());
 		existingUser.setPassword(user.getPassword());
 		existingUser.setRole(user.getRole());
+		existingUser.setPhoneNum(user.getPhoneNum());
 
 		return repo.save(existingUser);
 	}
