@@ -11,7 +11,6 @@ public class Contact {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	private int cId;
 	
 	@Column(nullable = false)

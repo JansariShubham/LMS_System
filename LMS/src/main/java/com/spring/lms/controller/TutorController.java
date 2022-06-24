@@ -37,9 +37,9 @@ public class TutorController {
 	}
 	
 	@GetMapping("/tutor")
-	public List<User> getTutors(User user)
+	public List<User> getTutors()
 	{
-		return userService.getTutors(user);
+		return userService.getTutors();
 	}
 	
 	@GetMapping("/tutor/{tutor_id}")
@@ -49,16 +49,16 @@ public class TutorController {
 	}
 	
 	@PutMapping("/tutor")
-	public Tutor updateTutor(@RequestBody Tutor tutor)
+	public User updateTutor(@RequestBody User user)
 	{
-		return tutorService.updateTutor(tutor);
+		return userService.updateTutor(user);
 		
 	}
 	
-	@DeleteMapping("/tutor/{tutor_id}")
-	public String deleteTutor(@PathVariable int tutor_id)
+	@DeleteMapping("/tutor/{user_id}")
+	public String deleteTutor(@PathVariable int user_id)
 	{
-		return tutorService.deleteTutor(tutor_id);
+		return userService.deleteTutor(user_id);
 	}
 
 }

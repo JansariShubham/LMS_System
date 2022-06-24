@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.lms.dto.CourseDTO;
+
 import com.spring.lms.model.Chapters;
 import com.spring.lms.model.Course;
 import com.spring.lms.service.CourseService;

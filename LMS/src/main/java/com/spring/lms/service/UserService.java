@@ -17,11 +17,9 @@ public class UserService {
 
 	@Autowired
 	RegistartionRepo repo;
-	
-	
+
 	@Autowired
 	TutorRepo tutorRepo;
-	
 
 	public User signUp(User user) {
 
@@ -80,7 +78,7 @@ public class UserService {
 		// TODO Auto-generated method stub
 		repo.deleteById(user_id);
 		return "User Deleted!! " + user_id;
-		
+
 	}
 
 	public List<User> getUserList() {
@@ -96,13 +94,12 @@ public class UserService {
 	@Transactional
 	public User saveTutor(User user) {
 		// TODO Auto-generated method stub
-		
+
 		Tutor tutor = new Tutor();
-		//Tutor tutor;
+		// Tutor tutor;
 		User existingUser = repo.findByEmailId(user.getEmailId());
-		
-		if(existingUser != null)
-		{
+
+		if (existingUser != null) {
 			System.out.println("hii");
 			existingUser.setRole("tutor");
 			existingUser.setFirstName(user.getFirstName());
@@ -112,34 +109,39 @@ public class UserService {
 			tutor.setUser(existingUser);
 			tutorRepo.save(tutor);
 			return repo.save(existingUser);
-		}
-		else
-		{
+		} else {
 			System.out.println("hello ,,,");
 			tutor.setUser(user);
 			tutorRepo.save(tutor);
-			//return signUp(user);
-			
+			// return signUp(user);
+
 		}
 		return null;
-		
-		
-		
+
 	}
 
-	public List<User> getTutors(User user) {
+	public List<User> getTutors() {
 		// TODO Auto-generated method stub
-		
-		if(user.getRole().equals("tutor"))
-		{
-			System.out.println("Hello");
-			return repo.findAll();
-		}
-		System.out.println("hii");
-		return null;
+
+		return repo.findByrole("tutor");
 	}
 
-	
+	public User updateTutor(User user) {
+		// TODO Auto-generated method stub
+		User existingUser = repo.findById(user.getUser_id()).orElse(null);
+		existingUser.setEmailId(user.getEmailId());
+		existingUser.setFirstName(user.getFirstName());
+		existingUser.setLastName(user.getLastName());
+		existingUser.setPassword(user.getPassword());
+		existingUser.setPhoneNum(user.getPhoneNum());
+		return repo.save(existingUser);
+	}
+
+	public String deleteTutor(int user_id) {
+		// TODO Auto-generated method stub
+		repo.deleteById(user_id);
+		return "Tutor Deleted!! " + user_id;
+	}
 
 //	public Tutor saveTutor(Tutor tutor) {
 //		
