@@ -2,17 +2,26 @@ package com.spring.lms.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.lms.model.Tutor;
 import com.spring.lms.model.User;
 import com.spring.lms.repository.RegistartionRepo;
+import com.spring.lms.repository.TutorRepo;
 
 @Service
 public class UserService {
 
 	@Autowired
 	RegistartionRepo repo;
+	
+	
+	@Autowired
+	TutorRepo tutorRepo;
+	
 
 	public User signUp(User user) {
 
@@ -37,14 +46,18 @@ public class UserService {
 			if (tempUser.getPassword().matches(user.getPassword())) {
 
 				System.out.println("login success!!");
+				tempUser.setPasswordError(false);
+				tempUser.setEmailError(false);
 				return tempUser;
 			}
 
 			else {
+				tempUser.setPasswordError(true);
 				System.out.println("login failed!!");
 				return tempUser;
 			}
 		}
+		tempUser.setEmailError(true);
 		return tempUser;
 
 	}
@@ -79,5 +92,60 @@ public class UserService {
 		// TODO Auto-generated method stub
 		return repo.findById(user_id).orElse(null);
 	}
+
+	@Transactional
+	public User saveTutor(User user) {
+		// TODO Auto-generated method stub
+		
+		Tutor tutor = new Tutor();
+		//Tutor tutor;
+		User existingUser = repo.findByEmailId(user.getEmailId());
+		
+		if(existingUser != null)
+		{
+			System.out.println("hii");
+			existingUser.setRole("tutor");
+			existingUser.setFirstName(user.getFirstName());
+			existingUser.setLastName(user.getLastName());
+			existingUser.setPassword(user.getPassword());
+			existingUser.setPhoneNum(user.getPhoneNum());
+			tutor.setUser(existingUser);
+			tutorRepo.save(tutor);
+			return repo.save(existingUser);
+		}
+		else
+		{
+			System.out.println("hello ,,,");
+			tutor.setUser(user);
+			tutorRepo.save(tutor);
+			//return signUp(user);
+			
+		}
+		return null;
+		
+		
+		
+	}
+
+	public List<User> getTutors(User user) {
+		// TODO Auto-generated method stub
+		
+		if(user.getRole().equals("tutor"))
+		{
+			System.out.println("Hello");
+			return repo.findAll();
+		}
+		System.out.println("hii");
+		return null;
+	}
+
+	
+
+//	public Tutor saveTutor(Tutor tutor) {
+//		
+//		return repo.save(tutor);
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 }

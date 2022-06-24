@@ -1,5 +1,7 @@
 package com.spring.lms.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 //import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class User {
@@ -14,16 +17,45 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int user_id;
 	
+	@Column(nullable = false)
 	private String firstName;
+	
+	@Column(nullable = false)
 	private String lastName;
+	
+	@Column(unique = true)
 	private String emailId;
+	
+	@Column(nullable = false)
 	private String password;
+	
+	@Column(nullable = false)
 	private String role;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "tutor_fk")
-//	private Tutor tutor;
+	@Column(nullable = true)
+	private String phoneNum;
 	
+	@Transient
+	private boolean emailError;
+	
+	@Transient
+	private boolean passwordError;
+	
+	
+
+	
+	public boolean isEmailError() {
+		return emailError;
+	}
+	public void setEmailError(boolean emailError) {
+		this.emailError = emailError;
+	}
+	public boolean isPasswordError() {
+		return passwordError;
+	}
+	public void setPasswordError(boolean passwordError) {
+		this.passwordError = passwordError;
+	}
 	public int getUser_id() {
 		return user_id;
 	}
@@ -62,6 +94,14 @@ public class User {
 	public String getRole() {
 		return role;
 	}
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+	
+	
 	
 	
 	

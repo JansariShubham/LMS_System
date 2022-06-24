@@ -14,25 +14,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.lms.model.Course;
 import com.spring.lms.model.Tutor;
+import com.spring.lms.model.User;
 import com.spring.lms.service.TutorService;
+import com.spring.lms.service.UserService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class TutorController {
 	
 	@Autowired
 	private TutorService tutorService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@PostMapping("/tutor")
-	public Tutor addTutor(@RequestBody Tutor tutor)
+	public User addTutor(@RequestBody User user)
 	{
-		return tutorService.saveTutor(tutor);
+		System.out.println("in add tutor");
+		return userService.saveTutor(user);
+		 
 	}
 	
 	@GetMapping("/tutor")
-	public List<Tutor> getTutors()
+	public List<User> getTutors(User user)
 	{
-		return tutorService.getTutors();
+		return userService.getTutors(user);
 	}
 	
 	@GetMapping("/tutor/{tutor_id}")

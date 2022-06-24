@@ -3,9 +3,9 @@ package com.spring.lms.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.spring.lms.model.ContactUsDetails;
+import com.spring.lms.model.Contact;
 
 @Repository
-public interface ContactUsDetailsRepo extends JpaRepository<ContactUsDetails, Integer> {
+public interface ContactUsDetailsRepo extends JpaRepository<Contact, Integer> {
 
 }

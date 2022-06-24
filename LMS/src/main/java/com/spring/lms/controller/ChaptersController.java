@@ -17,7 +17,7 @@ import com.spring.lms.model.Course;
 import com.spring.lms.service.ChapterService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class ChaptersController {
 	
 	@Autowired

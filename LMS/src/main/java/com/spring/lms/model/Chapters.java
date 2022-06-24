@@ -2,8 +2,9 @@ package com.spring.lms.model;
 
 //import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,10 +19,15 @@ public class Chapters {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int chapterId;
+	
+	@Column(nullable = false)
 	private String chapterName;
 	
+	@Column(nullable = false)
 	private String chapterlink;
-	private LocalDate chapterDate;
+	
+	@Column(nullable = false)
+	private Date chapterDate;
 	
 	public int getChapterId() {
 		return chapterId;
@@ -41,12 +47,13 @@ public class Chapters {
 	public void setChapterlink(String chapterlink) {
 		this.chapterlink = chapterlink;
 	}
-	public LocalDate getChapterDate() {
+	public Date getChapterDate() {
 		return chapterDate;
 	}
-	public void setChapterDate(LocalDate chapterDate) {
+	public void setChapterDate(Date chapterDate) {
 		this.chapterDate = chapterDate;
 	}
+	
 	
 	
 
