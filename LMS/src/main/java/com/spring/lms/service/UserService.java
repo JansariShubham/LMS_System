@@ -1,5 +1,6 @@
 package com.spring.lms.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -17,11 +18,9 @@ public class UserService {
 
 	@Autowired
 	RegistartionRepo repo;
-	
-	
+
 	@Autowired
 	TutorRepo tutorRepo;
-	
 
 	public User signUp(User user) {
 
@@ -36,30 +35,17 @@ public class UserService {
 	public User login(User user) {
 
 		User tempUser = repo.findByEmailId(user.getEmailId());
-//		String emailError = "Invalid Email ID!! ";
-//		String passwordError = "Invalid Password!! ";
-		// System.out.println(tempUser);
-		// System.out.println(tempUser.getPassword());
-		// System.out.println(user.getPassword());
-
-		if (tempUser != null) {
-			if (tempUser.getPassword().matches(user.getPassword())) {
-
-				System.out.println("login success!!");
-				tempUser.setPasswordError(false);
-				tempUser.setEmailError(false);
-				return tempUser;
-			}
-
-			else {
+		if(tempUser != null) {
+			if(!Arrays.equals(tempUser.getPassword(), user.getPassword())) {
+				System.out.println("---> Invalid password...");
 				tempUser.setPasswordError(true);
-				System.out.println("login failed!!");
-				return tempUser;
 			}
+		}else {
+			tempUser = new User();
+			System.out.println("---> User doesn't exist...");
+			tempUser.setEmailError(true);;
 		}
-		tempUser.setEmailError(true);
 		return tempUser;
-
 	}
 
 	public User updateUserData(User user) {
@@ -80,7 +66,7 @@ public class UserService {
 		// TODO Auto-generated method stub
 		repo.deleteById(user_id);
 		return "User Deleted!! " + user_id;
-		
+
 	}
 
 	public List<User> getUserList() {
@@ -96,13 +82,12 @@ public class UserService {
 	@Transactional
 	public User saveTutor(User user) {
 		// TODO Auto-generated method stub
-		
+
 		Tutor tutor = new Tutor();
-		//Tutor tutor;
+		// Tutor tutor;
 		User existingUser = repo.findByEmailId(user.getEmailId());
-		
-		if(existingUser != null)
-		{
+
+		if (existingUser != null) {
 			System.out.println("hii");
 			existingUser.setRole("tutor");
 			existingUser.setFirstName(user.getFirstName());
@@ -112,34 +97,27 @@ public class UserService {
 			tutor.setUser(existingUser);
 			tutorRepo.save(tutor);
 			return repo.save(existingUser);
-		}
-		else
-		{
+		} else {
 			System.out.println("hello ,,,");
 			tutor.setUser(user);
 			tutorRepo.save(tutor);
-			//return signUp(user);
-			
+			// return signUp(user);
+
 		}
 		return null;
-		
-		
-		
+
 	}
 
 	public List<User> getTutors(User user) {
 		// TODO Auto-generated method stub
-		
-		if(user.getRole().equals("tutor"))
-		{
+
+		if (user.getRole().equals("tutor")) {
 			System.out.println("Hello");
 			return repo.findAll();
 		}
 		System.out.println("hii");
 		return null;
 	}
-
-	
 
 //	public Tutor saveTutor(Tutor tutor) {
 //		
