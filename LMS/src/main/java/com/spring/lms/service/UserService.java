@@ -1,5 +1,6 @@
 package com.spring.lms.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -34,30 +35,17 @@ public class UserService {
 	public User login(User user) {
 
 		User tempUser = repo.findByEmailId(user.getEmailId());
-//		String emailError = "Invalid Email ID!! ";
-//		String passwordError = "Invalid Password!! ";
-		// System.out.println(tempUser);
-		// System.out.println(tempUser.getPassword());
-		// System.out.println(user.getPassword());
-
-		if (tempUser != null) {
-			if (tempUser.getPassword().matches(user.getPassword())) {
-
-				System.out.println("login success!!");
-				tempUser.setPasswordError(false);
-				tempUser.setEmailError(false);
-				return tempUser;
-			}
-
-			else {
+		if(tempUser != null) {
+			if(!Arrays.equals(tempUser.getPassword(), user.getPassword())) {
+				System.out.println("---> Invalid password...");
 				tempUser.setPasswordError(true);
-				System.out.println("login failed!!");
-				return tempUser;
 			}
+		}else {
+			tempUser = new User();
+			System.out.println("---> User doesn't exist...");
+			tempUser.setEmailError(true);;
 		}
-		tempUser.setEmailError(true);
 		return tempUser;
-
 	}
 
 	public User updateUserData(User user) {
@@ -70,6 +58,7 @@ public class UserService {
 		existingUser.setEmailId(user.getEmailId());
 		existingUser.setPassword(user.getPassword());
 		existingUser.setRole(user.getRole());
+		existingUser.setPhoneNum(user.getPhoneNum());
 
 		return repo.save(existingUser);
 	}
@@ -123,9 +112,19 @@ public class UserService {
 	public List<User> getTutors() {
 		// TODO Auto-generated method stub
 
+<<<<<<< HEAD
 		return repo.findByrole("tutor");
+=======
+		if (user.getRole().equals("tutor")) {
+			System.out.println("Hello");
+			return repo.findAll();
+		}
+		System.out.println("hii");
+		return null;
+>>>>>>> branch 'main' of https://github.com/JansariShubham/LMS_System.git
 	}
 
+<<<<<<< HEAD
 	public User updateTutor(User user) {
 		// TODO Auto-generated method stub
 		User existingUser = repo.findById(user.getUser_id()).orElse(null);
@@ -143,6 +142,8 @@ public class UserService {
 		return "Tutor Deleted!! " + user_id;
 	}
 
+=======
+>>>>>>> branch 'main' of https://github.com/JansariShubham/LMS_System.git
 //	public Tutor saveTutor(Tutor tutor) {
 //		
 //		return repo.save(tutor);
