@@ -112,19 +112,20 @@ public class UserService {
 	public List<User> getTutors() {
 		// TODO Auto-generated method stub
 
-<<<<<<< HEAD
-		return repo.findByrole("tutor");
-=======
-		if (user.getRole().equals("tutor")) {
-			System.out.println("Hello");
-			return repo.findAll();
-		}
-		System.out.println("hii");
-		return null;
->>>>>>> branch 'main' of https://github.com/JansariShubham/LMS_System.git
+//<<<<<<< HEAD
+			return repo.findByrole("tutor");
 	}
+//=======
+//		if (user.getRole().equals("tutor")) {
+//			System.out.println("Hello");
+//			return repo.findAll();
+//		}
+//		System.out.println("hii");
+//		return null;
+//>>>>>>> branch 'main' of https://github.com/JansariShubham/LMS_System.git
+//	}
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	public User updateTutor(User user) {
 		// TODO Auto-generated method stub
 		User existingUser = repo.findById(user.getUser_id()).orElse(null);
@@ -142,8 +143,8 @@ public class UserService {
 		return "Tutor Deleted!! " + user_id;
 	}
 
-=======
->>>>>>> branch 'main' of https://github.com/JansariShubham/LMS_System.git
+//=======
+//>>>>>>> branch 'main' of https://github.com/JansariShubham/LMS_System.git
 //	public Tutor saveTutor(Tutor tutor) {
 //		
 //		return repo.save(tutor);
