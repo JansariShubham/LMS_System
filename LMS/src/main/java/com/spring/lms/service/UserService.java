@@ -35,15 +35,16 @@ public class UserService {
 	public User login(User user) {
 
 		User tempUser = repo.findByEmailId(user.getEmailId());
-		if(tempUser != null) {
-			if(!Arrays.equals(tempUser.getPassword(), user.getPassword())) {
+		if (tempUser != null) {
+			if (!Arrays.equals(tempUser.getPassword(), user.getPassword())) {
 				System.out.println("---> Invalid password...");
 				tempUser.setPasswordError(true);
 			}
-		}else {
+		} else {
 			tempUser = new User();
 			System.out.println("---> User doesn't exist...");
-			tempUser.setEmailError(true);;
+			tempUser.setEmailError(true);
+			;
 		}
 		return tempUser;
 	}
@@ -111,21 +112,9 @@ public class UserService {
 
 	public List<User> getTutors() {
 		// TODO Auto-generated method stub
-
-//<<<<<<< HEAD
-			return repo.findByrole("tutor");
+		return repo.findByrole("tutor");
 	}
-//=======
-//		if (user.getRole().equals("tutor")) {
-//			System.out.println("Hello");
-//			return repo.findAll();
-//		}
-//		System.out.println("hii");
-//		return null;
-//>>>>>>> branch 'main' of https://github.com/JansariShubham/LMS_System.git
-//	}
 
-//<<<<<<< HEAD
 	public User updateTutor(User user) {
 		// TODO Auto-generated method stub
 		User existingUser = repo.findById(user.getUser_id()).orElse(null);
@@ -142,14 +131,5 @@ public class UserService {
 		repo.deleteById(user_id);
 		return "Tutor Deleted!! " + user_id;
 	}
-
-//=======
-//>>>>>>> branch 'main' of https://github.com/JansariShubham/LMS_System.git
-//	public Tutor saveTutor(Tutor tutor) {
-//		
-//		return repo.save(tutor);
-//		// TODO Auto-generated method stub
-//		
-//	}
 
 }

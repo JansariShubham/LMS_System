@@ -1,11 +1,14 @@
 package com.spring.lms.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 //import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -37,6 +40,9 @@ public class User {
 
 	@Transient
 	private boolean passwordError;
+	
+	@OneToOne(cascade = CascadeType.ALL , mappedBy = "user")
+	private Tutor tutor;
 
 	public boolean isEmailError() {
 		return emailError;
@@ -109,5 +115,15 @@ public class User {
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
+
+	public Tutor getTutor() {
+		return tutor;
+	}
+
+	public void setTutor(Tutor tutor) {
+		this.tutor = tutor;
+	}
+	
+	
 
 }
