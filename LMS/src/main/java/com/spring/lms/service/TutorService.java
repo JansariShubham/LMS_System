@@ -24,10 +24,10 @@ public class TutorService {
 //		return tutorRepo.findAll();
 //	}
 
-	public Tutor getTutorById(int tutor_id) {
-		// TODO Auto-generated method stub
-		return tutorRepo.findById(tutor_id).orElse(null);
-	}
+//	public Tutor getTutorById(int tutor_id) {
+//		// TODO Auto-generated method stub
+//		return tutorRepo.findById(tutor_id).orElse(null);
+//	}
 
 	public String deleteTutor(int user_id) {
 		// TODO Auto-generated method stub

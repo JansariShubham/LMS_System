@@ -42,10 +42,10 @@ public class TutorController {
 		return userService.getTutors();
 	}
 	
-	@GetMapping("/tutor/{tutor_id}")
-	public Tutor getTutorById(@PathVariable int tutor_id)
+	@GetMapping("/tutor/{user_id}")
+	public User getTutorById(@PathVariable int user_id)
 	{
-		return tutorService.getTutorById(tutor_id);
+		return userService.getTutorById(user_id);
 	}
 	
 	@PutMapping("/tutor")
@@ -59,7 +59,7 @@ public class TutorController {
 	@DeleteMapping("/tutor/{user_id}")
 	public String deleteTutor(@PathVariable int user_id)
 	{
-		return tutorService.deleteTutor(user_id);
+		return userService.deleteTutor(user_id);
 	}
 
 }

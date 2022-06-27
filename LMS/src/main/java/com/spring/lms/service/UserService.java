@@ -132,4 +132,9 @@ public class UserService {
 		return "Tutor Deleted!! " + user_id;
 	}
 
+	public User getTutorById(int user_id) {
+		// TODO Auto-generated method stub
+		return repo.findById(user_id).orElse(null);
+	}
+
 }
