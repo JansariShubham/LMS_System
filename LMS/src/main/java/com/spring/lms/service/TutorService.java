@@ -20,13 +20,19 @@ public class TutorService {
 //	}
 //
 //	public List<Tutor> getTutors() {
-//		// TODO Auto-generated method stub
+////		// TODO Auto-generated method stub
 //		return tutorRepo.findAll();
 //	}
 
 	public Tutor getTutorById(int tutor_id) {
 		// TODO Auto-generated method stub
 		return tutorRepo.findById(tutor_id).orElse(null);
+	}
+
+	public String deleteTutor(int user_id) {
+		// TODO Auto-generated method stub
+		tutorRepo.deleteById(user_id);
+		return "tutor removed";
 	}
 
 //	public Tutor updateTutor(Tutor tutor) {
