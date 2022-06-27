@@ -14,18 +14,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LmsApplication {
 
-	private static EmailUtility utility;
-
-	@Autowired
-	public void setUtility(EmailUtility util){
-		utility = util;
-		System.out.println("\nSetter injection");
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(LmsApplication.class, args);
 		System.out.println("Application started...");
-		utility.sendEmail("sunnyvachheta89@gmail.com", "This is test email", "Hello there....");
+		
 	}
 
 }
