@@ -41,8 +41,8 @@ public class User {
 	@Transient
 	private boolean passwordError;
 	
-//	@OneToOne(cascade = CascadeType.ALL , mappedBy = "user")
-//	private Tutor tutor;
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
+	private Tutor tutor;
 
 	public boolean isEmailError() {
 		return emailError;
