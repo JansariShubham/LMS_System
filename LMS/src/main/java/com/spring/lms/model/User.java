@@ -116,13 +116,7 @@ public class User {
 		this.phoneNum = phoneNum;
 	}
 
-//	public Tutor getTutor() {
-//		return tutor;
-//	}
-//
-//	public void setTutor(Tutor tutor) {
-//		this.tutor = tutor;
-//	}
+
 	
 	
 

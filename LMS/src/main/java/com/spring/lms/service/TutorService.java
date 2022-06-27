@@ -47,10 +47,5 @@ public class TutorService {
 //		return tutorRepo.save(existingTutor);
 //	}
 
-//	public String deleteTutor(int tutor_id) {
-//		// TODO Auto-generated method stub
-//		tutorRepo.deleteById(tutor_id);
-//		return "Tutor Removed!! " + tutor_id;
-//	}
 	
 }

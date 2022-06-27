@@ -50,6 +50,7 @@ public class TutorController {
 	
 	@PutMapping("/tutor")
 	public User updateTutor(@RequestBody User user)
+	
 	{
 		return userService.updateTutor(user);
 		
