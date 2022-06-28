@@ -39,8 +39,8 @@ public class UserController {
 		return userService.updateUserData(user);
 	}
 
-	@GetMapping("/user/forget_password/{userEmail}")
-	public Boolean forgotPassword(@PathVariable("userEmail") String userEmail){
+	@PostMapping("/user/forgot-password")
+	public Boolean forgotPassword(String userEmail){
 		System.out.println("\nUser Email: " + userEmail);
 		Boolean isUserExists = userService.isUserExistsWithEmail(userEmail);
 		return isUserExists;
