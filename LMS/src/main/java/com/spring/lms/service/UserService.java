@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.spring.lms.utility.EmailUtility;
+//import com.sun.org.apache.xpath.internal.operations.String;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +19,13 @@ import com.spring.lms.repository.TutorRepo;
 public class UserService {
 
 	@Autowired
-	RegistartionRepo repo;
+	private RegistartionRepo repo;
 
 	@Autowired
-	TutorRepo tutorRepo;
+	private TutorRepo tutorRepo;
+
+	@Autowired
+	private EmailUtility emailUtility;
 
 	public User signUp(User user) {
 
@@ -140,6 +145,22 @@ public class UserService {
     public Boolean isUserExistsWithEmail(String userEmail) {
     	User getUserWithEmail = repo.findByEmailId(userEmail);
 		System.out.println("\nGetUserWithEmail: " + getUserWithEmail);
-		return getUserWithEmail != null;
+		if( getUserWithEmail != null ){
+			return sendForgetPasswordByEmail(getUserWithEmail.getFirstName(), userEmail, getUserWithEmail.getPassword());
+		}else{
+			return false;
+		}
+	}
+
+	public Boolean sendForgetPasswordByEmail(String firstName, String userEmail, char[] password){
+		String emailSubject = "Recover Password For LMS | CourseLog";
+		String emailBody = "<div style ='text-align:center'>"
+							+ "<h1>Welcome Back " + firstName + ",</h1>"
+							+ "<hr /><br>"
+							+ "<h3>Here's Your Password</h3>"
+							+ "<h2>" + new String(password) + "</h2><br>"
+							+ "<br><span>Use This Password To Login.</span>"
+						+ "</div>";
+		return emailUtility.sendHTMLEmail(userEmail, emailSubject, emailBody);
 	}
 }

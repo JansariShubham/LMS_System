@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class EmailUtilityImpl implements EmailUtility
@@ -14,7 +17,7 @@ public class EmailUtilityImpl implements EmailUtility
     @Value("${spring.mail.username}")
     private String emailFrom;
     @Override
-    public boolean sendEmail(String emailTo, String emailSubject, String emailBody) {
+    public boolean sendTextEmail(String emailTo, String emailSubject, String emailBody) {
 
         try{
             System.out.println("\nUser From Email: " + this.emailFrom);
@@ -32,6 +35,26 @@ public class EmailUtilityImpl implements EmailUtility
             e.printStackTrace();
             System.out.println("\nError occured while sending email: " + e.getMessage());
         }
+        return false;
+    }
+
+    @Override
+    public boolean sendHTMLEmail(String emailTo, String emailSubject, String emailBody) {
+
+        try{
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setTo(emailTo);
+            mimeMessageHelper.setSubject(emailSubject);
+            mimeMessageHelper.setText(emailBody, true);
+            javaMailSender.send(mimeMessage);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("\nError during sending HTML email: " + e.getMessage());
+            e.printStackTrace();
+        }
+
         return false;
     }
 }
