@@ -40,7 +40,7 @@ public class UserController {
 	}
 
 	@PostMapping("/user/forgot-password")
-	public Boolean forgotPassword(String userEmail){
+	public Boolean forgotPassword(@RequestBody String userEmail){
 		System.out.println("\nUser Email: " + userEmail);
 		Boolean isUserExists = userService.isUserExistsWithEmail(userEmail);
 		return isUserExists;
