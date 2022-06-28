@@ -137,4 +137,9 @@ public class UserService {
 		return repo.findById(user_id).orElse(null);
 	}
 
+    public Boolean isUserExistsWithEmail(String userEmail) {
+    	User getUserWithEmail = repo.findByEmailId(userEmail);
+		System.out.println("\nGetUserWithEmail: " + getUserWithEmail);
+		return getUserWithEmail != null;
+	}
 }

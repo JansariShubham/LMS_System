@@ -1,25 +1,18 @@
 package com.spring.lms.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.spring.lms.model.User;
 import com.spring.lms.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@GetMapping("/user")
 	public List<User> getUsers()
@@ -44,6 +37,13 @@ public class UserController {
 	public User updateUser(@RequestBody User user)
 	{
 		return userService.updateUserData(user);
+	}
+
+	@GetMapping("/user/forget_password/{userEmail}")
+	public Boolean forgotPassword(@PathVariable("userEmail") String userEmail){
+		System.out.println("\nUser Email: " + userEmail);
+		Boolean isUserExists = userService.isUserExistsWithEmail(userEmail);
+		return isUserExists;
 	}
 
 }
