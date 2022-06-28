@@ -1,5 +1,7 @@
 package com.spring.lms.model;
 
+import java.io.Serializable;
+
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ContactDetails {
+public class ContactDetails implements Serializable {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.AUTO)
 	 

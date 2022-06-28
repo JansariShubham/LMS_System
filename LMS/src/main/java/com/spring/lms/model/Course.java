@@ -1,5 +1,6 @@
 package com.spring.lms.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Course {
+public class Course implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

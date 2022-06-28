@@ -1,5 +1,6 @@
 package com.spring.lms.model;
 
+import java.io.Serializable;
 //import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Date;
@@ -13,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Chapters {
+public class Chapters implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
