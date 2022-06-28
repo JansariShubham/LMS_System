@@ -29,11 +29,11 @@ public class TutorService {
 //		return tutorRepo.findById(tutor_id).orElse(null);
 //	}
 
-	public String deleteTutor(int user_id) {
-		// TODO Auto-generated method stub
-		tutorRepo.deleteById(user_id);
-		return "tutor removed";
-	}
+//	public String deleteTutor(int user_id) {
+//		// TODO Auto-generated method stub
+//		tutorRepo.deleteById(user_id);
+//		return "tutor removed";
+//	}
 
 //	public Tutor updateTutor(Tutor tutor) {
 //		// TODO Auto-generated method stub

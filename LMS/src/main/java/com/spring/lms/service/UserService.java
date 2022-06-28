@@ -64,10 +64,10 @@ public class UserService {
 		return repo.save(existingUser);
 	}
 
-	public String deleteUserData(int user_id) {
+	public User deleteUserData(int user_id) {
 		// TODO Auto-generated method stub
 		repo.deleteById(user_id);
-		return "User Deleted!! " + user_id;
+		return null;
 
 	}
 
@@ -126,10 +126,10 @@ public class UserService {
 		return repo.save(existingUser);
 	}
 
-	public String deleteTutor(int user_id) {
+	public User deleteTutor(int user_id) {
 		// TODO Auto-generated method stub
 		repo.deleteById(user_id);
-		return "Tutor Deleted!! " + user_id;
+		return null;
 	}
 
 	public User getTutorById(int user_id) {
