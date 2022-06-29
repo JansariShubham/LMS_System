@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.lms.model.Contact;
+import com.spring.lms.model.User;
 import com.spring.lms.repository.ContactRepo;
 
 @Service
@@ -22,6 +23,11 @@ public class ContactService {
 	public List<Contact> getDetails() {
 		// TODO Auto-generated method stub
 		return contactRepo.findAll();
+	}
+
+	public Contact getcontactById(int cId) {
+		// TODO Auto-generated method stub
+		return contactRepo.findById(cId).orElse(null);
 	}
 
 }
