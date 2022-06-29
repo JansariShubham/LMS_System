@@ -39,5 +39,11 @@ public class ContactController {
 	{
 		return contactService.getcontactById(cId);
 	}
+	
+	@PostMapping("/contact-reply")
+	public Boolean getEmailData(@RequestBody Contact contact)
+	{
+		return contactService.sendEmailData(contact);
+	}
 
 }
