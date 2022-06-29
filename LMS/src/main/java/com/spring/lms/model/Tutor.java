@@ -35,6 +35,9 @@ public class Tutor {
 	@OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
 	@JoinColumn(name = "user_fk")
 	private User user;
+	
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "tutor")
+	private Course course;
 
 	public User getUser() {
 		return user;

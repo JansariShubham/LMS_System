@@ -41,7 +41,7 @@ public class CourseService {
 		// TODO Auto-generated method stub
 		Course existingCourse = courseRepo.findById(course.getCourseId()).orElse(null);
 		existingCourse.setCourseName(course.getCourseName());
-		existingCourse.setCourseDescripition(course.getCourseDescripition());
+		existingCourse.setCourseDescription(course.getCourseDescription());
 		return courseRepo.save(existingCourse);
 		
 	}
