@@ -1,5 +1,6 @@
 package com.spring.lms.service;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import com.spring.lms.utility.EmailUtility;
 //import com.sun.org.apache.xpath.internal.operations.String;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.lms.model.Tutor;
 import com.spring.lms.model.User;
@@ -96,18 +98,34 @@ public class UserService {
 
 		if (existingUser != null) {
 			System.out.println("hii");
-			existingUser.setRole("tutor");
+			
+		
 			existingUser.setFirstName(user.getFirstName());
 			existingUser.setLastName(user.getLastName());
 			existingUser.setPassword(user.getPassword());
 			existingUser.setPhoneNum(user.getPhoneNum());
+			//existingUser.setImage(file.getBytes());\
+			System.out.println(existingUser.getRole());
+			if(existingUser.getRole().equals("student"))
+			{
+				System.out.println("hello");
+				
+				existingUser.setRole("tutor"); 
+				tutor.setUser(existingUser);
+				
+				tutorRepo.save(tutor);
+				
+			}
+			
+			
 			tutor.setUser(existingUser);
-			tutorRepo.save(tutor);
 			return repo.save(existingUser);
 		} else {
 			System.out.println("hello ,,,");
+			//user.setImage(file.getBytes());
 			tutor.setUser(user);
 			tutorRepo.save(tutor);
+			
 			// return signUp(user);
 
 		}
