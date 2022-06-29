@@ -1,14 +1,6 @@
 package com.spring.lms.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Tutor {
@@ -39,6 +31,10 @@ public class Tutor {
 	@OneToOne(cascade = CascadeType.ALL,mappedBy = "tutor")
 	private Course course;
 
+	@Lob
+	@Column(name = "tutor_image", length = Integer.MAX_VALUE, nullable = false)
+	private byte[] tutorImage;
+
 	public User getUser() {
 		return user;
 	}
@@ -50,6 +46,14 @@ public class Tutor {
 	}
 	public void setTutor_id(int tutor_id) {
 		this.tutor_id = tutor_id;
+	}
+
+	public byte[] getTutorImage() {
+		return tutorImage;
+	}
+
+	public void setTutorImage(byte[] tutorImage) {
+		this.tutorImage = tutorImage;
 	}
 //	public String getFirstName() {
 //		return firstName;
