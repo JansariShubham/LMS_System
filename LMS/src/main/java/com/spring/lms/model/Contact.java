@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Contact implements Serializable {
@@ -14,6 +15,9 @@ public class Contact implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cId;
+	
+	@Transient
+	private String replyMessage;
 	
 	@Column(nullable = false)
 	private String name;
@@ -56,6 +60,19 @@ public class Contact implements Serializable {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	public String getReplyMessage() {
+		return replyMessage;
+	}
+	public void setReplyMessage(String replyMessage) {
+		this.replyMessage = replyMessage;
+	}
+	@Override
+	public String toString() {
+		return "Contact [cId=" + cId + ", replyMessage=" + replyMessage + ", name=" + name + ", emailId=" + emailId
+				+ ", message=" + message + ", status=" + status + "]";
+	}
+	
+	
 	
 	
 

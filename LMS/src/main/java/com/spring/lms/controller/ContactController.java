@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.lms.model.ContactDetails;
@@ -40,9 +41,15 @@ public class ContactController {
 		return contactService.getcontactById(cId);
 	}
 	
+	//@RequestMapping("/contact-reply")
 	@PostMapping("/contact-reply")
 	public Boolean getEmailData(@RequestBody Contact contact)
 	{
+		//Contact contact = new Contact();
+//		contact.setEmailId("shubhamjansari11@gmail.com");
+//		contact.setName("Shubham");
+//		contact.setMessage("hello");
+//		contact.setReplyMessage("hiiii user");
 		return contactService.sendEmailData(contact);
 	}
 

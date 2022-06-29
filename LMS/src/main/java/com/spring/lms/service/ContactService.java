@@ -38,8 +38,12 @@ public class ContactService {
 		// TODO Auto-generated method stub
 		String emailTo = contact.getEmailId();
 		String firstName = contact.getName();
+		//System.out.println(contact);
+		String replyMessage = contact.getReplyMessage();
+		System.out.println("name:" + firstName);
+		System.out.println("email:" + emailTo);
 		String emailBody =  "<div style ='text-align:center'>" + "<h1>Hello " + firstName + ",</h1>"
-				+ "<hr /><br>" + "<h3>Here's Your Answer</h3>" + "<h2>" + contact.getMessage() + "</h2><br>"
+				+ "<hr /><br>"  + "<h3>Here's Your Question</h3>" + "<h2>" + contact.getMessage() +"</h2><br> + <h3>Here's Your Answer</h3>" + "<h2>" + replyMessage + "</h2><br> " 
 				+ "<br><span>Thank you for Contact Us.</span>" + "</div>";
 		String emailSubject = "Reply from CourseLog";
 		return emailUtility.sendHTMLEmail(emailTo, emailSubject, emailBody);
