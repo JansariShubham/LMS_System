@@ -59,7 +59,7 @@ public class TutorController {
 	}
 
 	@PostMapping("/tutor/save-tutor")
-	public User uploadTutorImage(
+	public Tutor uploadTutorImage(
 									@RequestParam("profileImage") MultipartFile profileImage,
 									@RequestParam("firstName") String firstName,
 									@RequestParam("lastName") String lastName,
