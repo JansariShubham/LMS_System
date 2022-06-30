@@ -186,7 +186,7 @@ public class UserService {
 				return true;
 			} catch (Exception e) {
 				System.out.println("\nError during file upload... " + e.getMessage());
-				e.getMessage();
+				e.printStackTrace();
 				return false;
 			}
 
