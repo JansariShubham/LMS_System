@@ -1,5 +1,6 @@
 package com.spring.lms.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,24 +59,12 @@ public class TutorController {
 		return userService.deleteTutor(user_id);
 	}
 
-	@PostMapping("/tutor/save-tutor")
-	public Tutor uploadTutorImage(
-									@RequestParam("profileImage") MultipartFile profileImage,
-									@RequestParam("firstName") String firstName,
-									@RequestParam("lastName") String lastName,
-									@RequestParam("emailId") String emailId,
-									@RequestParam("password") char[] password,
-									@RequestParam("phoneNum") String phoneNum,
-									HttpServletRequest request
-								)
-	{
-		User update = new User();
-		update.setFirstName(firstName);
-		update.setLastName(lastName);
-		update.setEmailId(emailId);
-		update.setPassword(password);
-		update.setPhoneNum(phoneNum);
-		return tutorService.uploadTutorImageWithBasicData(profileImage, request, update);
+	@PostMapping("/tutor/save-tutor/{id}")
+	public boolean uploadTutorImage(
+									@PathVariable("id") int id,
+									@RequestParam("profileImage") MultipartFile profileImage
+								 ) throws IOException {
+		return userService.saveTutorProfileImage(id, profileImage);
 	}
 
 }

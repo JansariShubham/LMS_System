@@ -1,21 +1,21 @@
 package com.spring.lms.service;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import com.spring.lms.utility.EmailUtility;
-//import com.sun.org.apache.xpath.internal.operations.String;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.spring.lms.model.Tutor;
 import com.spring.lms.model.User;
 import com.spring.lms.repository.RegistartionRepo;
 import com.spring.lms.repository.TutorRepo;
+import com.spring.lms.utility.EmailUtility;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.transaction.Transactional;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+//import com.sun.org.apache.xpath.internal.operations.String;
 
 @Service
 public class UserService {
@@ -180,5 +180,23 @@ public class UserService {
 							+ "<br><span>Use This Password To Login.</span>"
 						+ "</div>";
 		return emailUtility.sendHTMLEmail(userEmail, emailSubject, emailBody);
+	}
+
+	public boolean saveTutorProfileImage(int id, MultipartFile profileImage) throws IOException {
+		Optional<User> userObj = repo.findById(id);
+		if(userObj.isPresent()){
+			User obj = userObj.get();
+			try {
+				obj.setProfileImage(profileImage.getBytes());
+				repo.save(obj);
+				return true;
+			}catch(Exception e){
+				System.out.println("\nError during file upload... " + e.getMessage());
+				e.getMessage();
+				return false;
+			}
+
+		}
+		else	return false;
 	}
 }

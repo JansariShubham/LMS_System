@@ -1,15 +1,8 @@
 package com.spring.lms.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import javax.persistence.*;
 //import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+
 
 @Entity
 public class User {
@@ -40,7 +33,11 @@ public class User {
 
 	@Transient
 	private boolean passwordError;
-	
+
+	@Lob
+	@Column(name = "profile_image", length = Integer.MAX_VALUE)
+	byte[] profileImage;
+
 	@OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
 	private Tutor tutor;
 
@@ -123,6 +120,21 @@ public class User {
 //	public void setTutor(Tutor tutor) {
 //		this.tutor = tutor;
 //	}
-	
 
+
+	public byte[] getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(byte[] profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	public Tutor getTutor() {
+		return tutor;
+	}
+
+	public void setTutor(Tutor tutor) {
+		this.tutor = tutor;
+	}
 }
