@@ -62,7 +62,7 @@ public class TutorService {
 		return tutorRepo.save(existingTutor);
 	}*/
 
-	public User uploadTutorImageWithBasicData(MultipartFile file, HttpServletRequest request){
+	public Tutor uploadTutorImageWithBasicData(MultipartFile file, HttpServletRequest request, User userObj){
 		try{
 			String uploadDirectory = request.getServletContext().getRealPath(uploadDir);
 			System.out.println("\nUpload directory: " + uploadDirectory);
@@ -88,7 +88,18 @@ public class TutorService {
 				e.printStackTrace();
 			}
 			byte[] imageData = file.getBytes();
+			Tutor tutorObj = new Tutor();
+			tutorObj.setUser(userObj);
+			tutorObj.setTutorImage(imageData);
 
+			try{
+				System.out.println("\nSaving tutor object...\n");
+				return tutorRepo.save(tutorObj);
+			}
+			catch(Exception e){
+				System.out.println("\nError occured: " + e.getMessage());
+				e.printStackTrace();
+			}
 		}catch(Exception e){
 			System.out.println("\nError during file upload: " + e.getMessage());
 			e.printStackTrace();

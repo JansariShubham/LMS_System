@@ -59,8 +59,23 @@ public class TutorController {
 	}
 
 	@PostMapping("/tutor/save-tutor")
-	public User uploadTutorImage(@RequestParam("file") MultipartFile file, HttpServletRequest request){
-		return tutorService.uploadTutorImageWithBasicData(file, request);
+	public User uploadTutorImage(
+									@RequestParam("profileImage") MultipartFile profileImage,
+									@RequestParam("firstName") String firstName,
+									@RequestParam("lastName") String lastName,
+									@RequestParam("emailId") String emailId,
+									@RequestParam("password") char[] password,
+									@RequestParam("phoneNum") String phoneNum,
+									HttpServletRequest request
+								)
+	{
+		User update = new User();
+		update.setFirstName(firstName);
+		update.setLastName(lastName);
+		update.setEmailId(emailId);
+		update.setPassword(password);
+		update.setPhoneNum(phoneNum);
+		return tutorService.uploadTutorImageWithBasicData(profileImage, request, update);
 	}
 
 }
