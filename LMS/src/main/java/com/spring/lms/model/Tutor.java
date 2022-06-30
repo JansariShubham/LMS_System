@@ -30,10 +30,10 @@ public class Tutor {
 	
 	@OneToOne(cascade = CascadeType.ALL,mappedBy = "tutor")
 	private Course course;
-
-	@Lob
-	@Column(name = "tutor_image", length = Integer.MAX_VALUE, nullable = false)
-	private byte[] tutorImage;
+//
+//	@Lob
+//	@Column(name = "tutor_image", length = Integer.MAX_VALUE, nullable = true)
+//	private byte[] tutorImage;
 
 	public User getUser() {
 		return user;
@@ -48,13 +48,13 @@ public class Tutor {
 		this.tutor_id = tutor_id;
 	}
 
-	public byte[] getTutorImage() {
-		return tutorImage;
-	}
-
-	public void setTutorImage(byte[] tutorImage) {
-		this.tutorImage = tutorImage;
-	}
+//	public byte[] getTutorImage() {
+//		return tutorImage;
+//	}
+//
+//	public void setTutorImage(byte[] tutorImage) {
+//		this.tutorImage = tutorImage;
+//	}
 //	public String getFirstName() {
 //		return firstName;
 //	}

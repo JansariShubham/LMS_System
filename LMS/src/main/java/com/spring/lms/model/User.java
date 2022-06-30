@@ -113,13 +113,6 @@ public class User {
 		this.phoneNum = phoneNum;
 	}
 
-//	public Tutor getTutor() {
-//		return tutor;
-//	}
-//
-//	public void setTutor(Tutor tutor) {
-//		this.tutor = tutor;
-//	}
 
 
 	public byte[] getProfileImage() {
@@ -130,11 +123,11 @@ public class User {
 		this.profileImage = profileImage;
 	}
 
-	public Tutor getTutor() {
-		return tutor;
-	}
-
-	public void setTutor(Tutor tutor) {
-		this.tutor = tutor;
-	}
+//	public Tutor getTutor() {
+//		return tutor;
+//	}
+//
+//	public void setTutor(Tutor tutor) {
+//		this.tutor = tutor;
+//	}
 }
