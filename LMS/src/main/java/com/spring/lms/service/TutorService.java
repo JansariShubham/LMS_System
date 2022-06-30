@@ -62,7 +62,7 @@ public class TutorService {
 		return tutorRepo.save(existingTutor);
 	}*/
 
-	public Tutor uploadTutorImageWithBasicData(MultipartFile file, HttpServletRequest request, User userObj){
+	/*public Tutor uploadTutorImageWithBasicData(MultipartFile file, HttpServletRequest request, User userObj){
 		try{
 			String uploadDirectory = request.getServletContext().getRealPath(uploadDir);
 			System.out.println("\nUpload directory: " + uploadDirectory);
@@ -105,6 +105,6 @@ public class TutorService {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
 	
 }
