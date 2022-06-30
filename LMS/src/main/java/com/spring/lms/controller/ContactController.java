@@ -41,15 +41,10 @@ public class ContactController {
 		return contactService.getcontactById(cId);
 	}
 	
-	//@RequestMapping("/contact-reply")
 	@PostMapping("/contact-reply")
 	public Boolean getEmailData(@RequestBody Contact contact)
 	{
-		//Contact contact = new Contact();
-//		contact.setEmailId("shubhamjansari11@gmail.com");
-//		contact.setName("Shubham");
-//		contact.setMessage("hello");
-//		contact.setReplyMessage("hiiii user");
+		
 		return contactService.sendEmailData(contact);
 	}
 

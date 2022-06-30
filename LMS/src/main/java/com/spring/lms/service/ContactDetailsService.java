@@ -35,4 +35,5 @@ public class ContactDetailsService {
 		return contactDetailsRepo.findAll();
 	}
 
+
 }

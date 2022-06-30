@@ -31,4 +31,10 @@ public class ContactDetailsController {
 	{
 		return contactDetailsService.getData();
 	}
+	
+//	@PostMapping
+//	public ContactDetails sendEmail(@RequestBody ContactDetails contactDetails)
+//	{
+//		return contactDetailsService.sendEmail(contactDetails)
+//	}
 }

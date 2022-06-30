@@ -66,6 +66,8 @@ public class Contact implements Serializable {
 	public void setReplyMessage(String replyMessage) {
 		this.replyMessage = replyMessage;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "Contact [cId=" + cId + ", replyMessage=" + replyMessage + ", name=" + name + ", emailId=" + emailId
