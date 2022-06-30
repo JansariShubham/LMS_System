@@ -98,38 +98,35 @@ public class UserService {
 
 		if (existingUser != null) {
 			System.out.println("hii");
-			
-		
+
 			existingUser.setFirstName(user.getFirstName());
 			existingUser.setLastName(user.getLastName());
 			existingUser.setPassword(user.getPassword());
 			existingUser.setPhoneNum(user.getPhoneNum());
-			//existingUser.setImage(file.getBytes());\
+			// existingUser.setImage(file.getBytes());\
 			System.out.println(existingUser.getRole());
-			if(existingUser.getRole().equals("student"))
-			{
+			if (existingUser.getRole().equals("student")) {
 				System.out.println("hello");
-				
-				existingUser.setRole("tutor"); 
+
+				existingUser.setRole("tutor");
 				tutor.setUser(existingUser);
-				
+
 				tutorRepo.save(tutor);
-				
+
 			}
-			
-			
+
 			tutor.setUser(existingUser);
 			return repo.save(existingUser);
 		} else {
 			System.out.println("hello ,,,");
-			//user.setImage(file.getBytes());
+			// user.setImage(file.getBytes());
 			tutor.setUser(user);
 			tutorRepo.save(tutor);
-			
+			return repo.save(user);
+
 			// return signUp(user);
 
 		}
-		return null;
 
 	}
 
@@ -160,44 +157,40 @@ public class UserService {
 		return repo.findById(user_id).orElse(null);
 	}
 
-    public Boolean isUserExistsWithEmail(String userEmail) {
-    	User getUserWithEmail = repo.findByEmailId(userEmail);
+	public Boolean isUserExistsWithEmail(String userEmail) {
+		User getUserWithEmail = repo.findByEmailId(userEmail);
 		System.out.println("\nGetUserWithEmail: " + getUserWithEmail);
-		if( getUserWithEmail != null ){
-			return sendForgetPasswordByEmail(getUserWithEmail.getFirstName(), userEmail, getUserWithEmail.getPassword());
-		}else{
+		if (getUserWithEmail != null) {
+			return sendForgetPasswordByEmail(getUserWithEmail.getFirstName(), userEmail,
+					getUserWithEmail.getPassword());
+		} else {
 			return false;
 		}
 	}
 
-	public Boolean sendForgetPasswordByEmail(String firstName, String userEmail, char[] password){
+	public Boolean sendForgetPasswordByEmail(String firstName, String userEmail, char[] password) {
 		String emailSubject = "Recover Password For LMS | CourseLog";
-		String emailBody = "<div style ='text-align:center'>"
-							+ "<h1>Welcome Back " + firstName + ",</h1>"
-							+ "<hr /><br>"
-							+ "<h3>Here's Your Password</h3>"
-							+ "<h2>" + new String(password) + "</h2><br>"
-							+ "<br><span>Use This Password To Login.</span>"
-						+ "</div>";
+		String emailBody = "<div style ='text-align:center'>" + "<h1>Welcome Back " + firstName + ",</h1>"
+				+ "<hr /><br>" + "<h3>Here's Your Password</h3>" + "<h2>" + new String(password) + "</h2><br>"
+				+ "<br><span>Use This Password To Login.</span>" + "</div>";
 		return emailUtility.sendHTMLEmail(userEmail, emailSubject, emailBody);
 	}
 
 	public boolean saveTutorProfileImage(int id, MultipartFile profileImage) throws IOException {
 		Optional<User> userObj = repo.findById(id);
-		if(userObj.isPresent()){
+		if (userObj.isPresent()) {
 			User obj = userObj.get();
 			try {
 				obj.setProfileImage(profileImage.getBytes());
 				repo.save(obj);
 				return true;
-			}catch(Exception e){
+			} catch (Exception e) {
 				System.out.println("\nError during file upload... " + e.getMessage());
 				e.getMessage();
 				return false;
 			}
 
-		}
-		else	
+		} else
 			return false;
 	}
 }
