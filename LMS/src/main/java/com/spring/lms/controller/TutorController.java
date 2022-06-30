@@ -64,6 +64,7 @@ public class TutorController {
 									@PathVariable("id") int id,
 									@RequestParam("profileImage") MultipartFile profileImage
 								 ) throws IOException {
+		System.out.println("\nUpload tutor profile image called....\n");
 		return userService.saveTutorProfileImage(id, profileImage);
 	}
 
