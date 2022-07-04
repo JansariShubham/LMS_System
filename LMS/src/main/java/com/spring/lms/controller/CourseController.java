@@ -1,5 +1,6 @@
 package com.spring.lms.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.lms.model.Chapters;
 import com.spring.lms.model.Course;
@@ -61,6 +63,14 @@ public class CourseController {
 	public String deleteCourse(@PathVariable int courseId)
 	{
 			return courseService.deleteCourse(courseId);
+	}
+	
+	
+	@PostMapping("/course/save-course/{id}")
+	public boolean uploadCourseImage(@PathVariable("id") int id,
+			@RequestParam("courseImage") MultipartFile courseImage) throws IOException {
+		System.out.println("\nUpload course  image called....\n");
+		return courseService.savecourseImage(id, courseImage);
 	}
 	
 	

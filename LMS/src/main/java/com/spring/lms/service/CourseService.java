@@ -1,12 +1,15 @@
 package com.spring.lms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.lms.model.Chapters;
 import com.spring.lms.model.Course;
+import com.spring.lms.model.User;
 import com.spring.lms.repository.ChaptersRepo;
 import com.spring.lms.repository.CourseRepo;
 
@@ -52,4 +55,24 @@ public class CourseService {
 			return "Course Removed!! " + courseId;
 	}
 
+	public boolean savecourseImage(int id, MultipartFile courseImage) {
+		// TODO Auto-generated method stub
+		
+		Optional<Course> courseobj = courseRepo.findById(id);
+		if (courseobj.isPresent()) {
+			Course obj = courseobj.get();
+			try {
+				obj.setCourseImage(courseImage.getBytes());
+				courseRepo.save(obj);
+				return true;
+			} catch (Exception e) {
+				System.out.println("\nError during file upload... " + e.getMessage());
+				e.printStackTrace();
+				return false;
+			}
+
+		} else
+			return false;
+	}
+	
 }
