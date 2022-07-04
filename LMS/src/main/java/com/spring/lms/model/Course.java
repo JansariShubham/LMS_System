@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -33,6 +34,8 @@ public class Course implements Serializable{
 	
 	private Date courseDate;
 	
+	@Lob
+	@Column(length = Integer.MAX_VALUE)
 	private byte[] courseImage;
 	
 	private int courseRating;
