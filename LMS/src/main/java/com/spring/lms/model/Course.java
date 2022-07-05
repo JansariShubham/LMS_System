@@ -49,6 +49,10 @@ public class Course implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "course_fk", referencedColumnName = "courseId")
 	private List<Chapters> chapters;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "course_fk", referencedColumnName = "courseId")
+	private List<Enrollment> enrollment;
 
 	public List<Chapters> getChapters() {
 		return chapters;
@@ -137,5 +141,14 @@ public class Course implements Serializable {
 	public void setTutor(Tutor tutor) {
 		this.tutor = tutor;
 	}
+
+	public List<Enrollment> getEnrollment() {
+		return enrollment;
+	}
+
+	public void setEnrollment(List<Enrollment> enrollment) {
+		this.enrollment = enrollment;
+	}
+	
 
 }
