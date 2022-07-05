@@ -25,10 +25,12 @@ public class TutorController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping("/tutor")
-	public User addTutor(@RequestBody User user) {
+	@PostMapping("/tutor/{profileImage}")
+	public User addTutor(@RequestBody User user,@PathVariable ("profileImage") MultipartFile file ) throws IOException {
 		System.out.println("in add tutor");
-		return userService.saveTutor(user);
+		User userobj=userService.saveTutor(user);
+		userService.saveTutorProfileImage(userobj.getUser_id(), file);
+		return userobj;
 
 	}
 
@@ -55,11 +57,11 @@ public class TutorController {
 		return userService.deleteTutor(user_id);
 	}
 
-	@PostMapping("/tutor/save-tutor/{id}")
-	public boolean uploadTutorImage(@PathVariable("id") int id,
-			@RequestParam("profileImage") MultipartFile profileImage) throws IOException {
-		System.out.println("\nUpload tutor profile image called....\n");
-		return userService.saveTutorProfileImage(id, profileImage);
-	}
+//	@PostMapping("/tutor/save-tutor/{id}")
+//	public boolean uploadTutorImage(@PathVariable("id") int id,
+//			@RequestParam("profileImage") MultipartFile profileImage) throws IOException {
+//		System.out.println("\nUpload tutor profile image called....\n");
+//		return userService.saveTutorProfileImage(id, profileImage);
+//	}
 
 }
