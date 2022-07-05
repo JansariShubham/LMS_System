@@ -5,6 +5,8 @@ import com.spring.lms.service.UserReviewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @CrossOrigin
@@ -16,7 +18,17 @@ public class UserReviewsController {
 
     @PostMapping("/post-review")
     public UserReviews postUserReview(@RequestBody UserReviews userReview){
-        userReviewsService.saveUserReview(userReview);
+        return userReviewsService.saveUserReview(userReview);
+    }
+
+    @GetMapping("/{courseId}")
+    public List<UserReviews> getAllUserReviewsOfCourse(@PathVariable Integer courseId){
+        userReviewsService.loadAllUserReviewForCourse(courseId);
         return null;
+    }
+
+    @DeleteMapping("/reviewId")
+    public boolean removeUserReview(@PathVariable Integer reviewId){
+        return userReviewsService.removeUserReviewFromCourse(reviewId);
     }
 }
