@@ -34,6 +34,8 @@ public class UserReviewsService{
     public Course updateCourseRating(int courseId){
         Integer[] sumAndCount = (Integer[]) userReviewsRepo.countTotalByCourseId(courseId);
         int courseRating = Math.round(sumAndCount[0] / sumAndCount[1]);
+        logger.info(">>> Total Rating , User {} , {}", sumAndCount[0], sumAndCount[1]);
+        logger.info(">>> Course Rating: {}", courseRating);
         Course getCourse = courseService.getCourse(courseId);
         getCourse.setCourseRating(courseRating);
         getCourse = courseService.updateCourse(getCourse);
@@ -41,10 +43,12 @@ public class UserReviewsService{
     }
 
     public List<UserReviews> loadAllUserReviewForCourse(Integer courseId) {
+        logger.info(">>> Fetching all user review from database");
         return userReviewsRepo.findByCourseId(courseId);
     }
 
     public boolean removeUserReviewFromCourse(Integer reviewId) {
+        logger.info(">>> REmoving review from database");
         Optional<UserReviews> userReview = userReviewsRepo.findById(reviewId);
         userReviewsRepo.deleteById(reviewId);
         Optional<Course> upCourse = Optional.ofNullable(updateCourseRating(userReview.get().getCourseId()));
