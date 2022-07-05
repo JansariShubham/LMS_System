@@ -1,5 +1,7 @@
 package com.spring.lms.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 //import javax.persistence.CascadeType;
 
@@ -40,6 +42,11 @@ public class User {
 
 	@OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
 	private Tutor tutor;
+	
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_fk", referencedColumnName = "user_id")
+	private List<Enrollment> enrollment ;
 
 	public boolean isEmailError() {
 		return emailError;
@@ -120,6 +127,15 @@ public class User {
 	public void setProfileImage(byte[] profileImage) {
 		this.profileImage = profileImage;
 	}
+
+	public List<Enrollment> getEnrollment() {
+		return enrollment;
+	}
+
+	public void setEnrollment(List<Enrollment> enrollment) {
+		this.enrollment = enrollment;
+	}
+	
 
 //	public Tutor getTutor() {
 //		return tutor;

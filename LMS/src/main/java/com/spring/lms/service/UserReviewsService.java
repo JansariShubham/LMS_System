@@ -21,6 +21,6 @@ public class UserReviewsService{
         userReview.setReviewDate(new Date());
         logger.info(">>> Saving User Review in database");
         userReviewsRepo.save(userReview);
-        Integer[] sumAnd = (Integer[]) userReviewsRepo.countTotalByCourseId(userReview.getCourseId());
+        //Integer[] sumAnd = (Integer[]) userReviewsRepo.countTotalByCourseId(userReview.getCourseId());
     }
 }

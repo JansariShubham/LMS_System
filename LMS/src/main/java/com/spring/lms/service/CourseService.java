@@ -21,9 +21,8 @@ public class CourseService {
 	private CourseRepo courseRepo;
 
 	public Course saveCourse(Course course) {
-		Course courseObj = new Course();
 		Tutor t = course.getTutor();
-		courseObj.setTutor(t);
+		course.setTutor(t);
 		return courseRepo.save(course);
 		
 	}
