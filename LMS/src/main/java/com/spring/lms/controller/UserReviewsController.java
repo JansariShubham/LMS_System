@@ -23,8 +23,8 @@ public class UserReviewsController {
 
     @GetMapping("/{courseId}")
     public List<UserReviews> getAllUserReviewsOfCourse(@PathVariable Integer courseId){
-        userReviewsService.loadAllUserReviewForCourse(courseId);
-        return null;
+        return userReviewsService.loadAllUserReviewForCourse(courseId);
+
     }
 
     @DeleteMapping("/reviewId")
