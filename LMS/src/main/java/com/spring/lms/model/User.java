@@ -113,8 +113,6 @@ public class User {
 		this.phoneNum = phoneNum;
 	}
 
-
-
 	public byte[] getProfileImage() {
 		return profileImage;
 	}

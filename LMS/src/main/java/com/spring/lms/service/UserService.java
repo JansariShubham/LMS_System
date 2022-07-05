@@ -116,7 +116,8 @@ public class UserService {
 			}
 
 			tutor.setUser(existingUser);
-			return repo.save(existingUser);
+			 repo.save(existingUser);
+			 return null;
 		} else {
 			System.out.println("hello ,,,");
 			// user.setImage(file.getBytes());

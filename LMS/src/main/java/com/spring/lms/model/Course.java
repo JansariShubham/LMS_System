@@ -16,42 +16,39 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Course implements Serializable{
-	
+public class Course implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int courseId;
-	
+
 	@Column(nullable = false)
 	private String courseName;
-	
+
 	@Column(nullable = false)
 	private String courseDescription;
-	
+
 	private int coursePrice;
-	
+
 	private int courseDuration;
-	
+
 	private Date courseDate;
-	
+
 	@Lob
 	@Column(length = Integer.MAX_VALUE)
 	private byte[] courseImage;
-	
+
 	private int courseRating;
-	
+
 	private String courseStatus;
-	
-	@OneToOne(cascade = CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "tutor_fk")
 	private Tutor tutor;
-	
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "course_fk" , referencedColumnName = "courseId")
+	@JoinColumn(name = "course_fk", referencedColumnName = "courseId")
 	private List<Chapters> chapters;
-	
-	
 
 	public List<Chapters> getChapters() {
 		return chapters;
@@ -140,13 +137,5 @@ public class Course implements Serializable{
 	public void setTutor(Tutor tutor) {
 		this.tutor = tutor;
 	}
-
-	
-	
-
-
-
-	
-	
 
 }

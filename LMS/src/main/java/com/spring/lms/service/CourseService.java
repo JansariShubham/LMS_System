@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.lms.model.Chapters;
 import com.spring.lms.model.Course;
+import com.spring.lms.model.Tutor;
 import com.spring.lms.model.User;
 import com.spring.lms.repository.ChaptersRepo;
 import com.spring.lms.repository.CourseRepo;
@@ -18,10 +19,12 @@ public class CourseService {
 	
 	@Autowired
 	private CourseRepo courseRepo;
-	
-	
+
 	public Course saveCourse(Course course) {
-		 return courseRepo.save(course);
+		Course courseObj = new Course();
+		Tutor t = course.getTutor();
+		courseObj.setTutor(t);
+		return courseRepo.save(course);
 		
 	}
 
