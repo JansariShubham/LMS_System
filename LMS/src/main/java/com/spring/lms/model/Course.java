@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Course implements Serializable {
@@ -41,6 +42,9 @@ public class Course implements Serializable {
 	private int courseRating;
 
 	private String courseStatus;
+	
+	@Transient
+	private int tutorId;
 
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "tutor_fk")
@@ -149,6 +153,16 @@ public class Course implements Serializable {
 	public void setEnrollment(List<Enrollment> enrollment) {
 		this.enrollment = enrollment;
 	}
+
+	public int getTutorId() {
+		return tutorId;
+	}
+
+	public void setTutorId(int tutorId) {
+		this.tutorId = tutorId;
+	}
+	
+	
 	
 
 }

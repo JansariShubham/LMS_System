@@ -13,16 +13,22 @@ import com.spring.lms.model.Tutor;
 import com.spring.lms.model.User;
 import com.spring.lms.repository.ChaptersRepo;
 import com.spring.lms.repository.CourseRepo;
+import com.spring.lms.repository.TutorRepo;
 
 @Service
 public class CourseService {
 	
 	@Autowired
 	private CourseRepo courseRepo;
+	
+	@Autowired
+	private TutorRepo tutorRepo;
 
 	public Course saveCourse(Course course) {
-		Tutor t = course.getTutor();
-		course.setTutor(t);
+		//Tutor t = course.getTutor();
+		//course.setTutor(t);
+		Tutor tutorId= tutorRepo.findById(course.getTutorId()).orElse(null);
+		course.setTutor(tutorId);
 		return courseRepo.save(course);
 		
 	}
