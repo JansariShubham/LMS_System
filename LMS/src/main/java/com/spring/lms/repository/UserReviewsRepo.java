@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserReviewsRepo extends JpaRepository<UserReviews, Integer> {
 
     @Query(value = "SELECT SUM(u.courseRating), COUNT(*) FROM UserReviews AS u WHERE u.courseId = ?1")
-    Object[] countTotalByCourseId(Integer courseId);
+    Integer[] countTotalByCourseId(Integer courseId);
 
     List<UserReviews> findByCourseId(Integer courseId);
 }
