@@ -46,7 +46,7 @@ public class User {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_fk", referencedColumnName = "user_id")
-	private List<Enrollment> enrollment ;
+	private List<Enrollment> enrollment;
 
 	public boolean isEmailError() {
 		return emailError;
