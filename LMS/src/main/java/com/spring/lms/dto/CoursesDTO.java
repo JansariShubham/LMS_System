@@ -1,5 +1,6 @@
 package com.spring.lms.dto;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -37,7 +38,7 @@ public class CoursesDTO {
 	}
 
 	public CoursesDTO(int courseId, String courseName, String courseDescription, int coursePrice, int courseDuration,
-			Date courseDate, byte[] courseImage, int courseRating, String courseStatus, String tutorName,
+			Date courseDate, byte[] courseImage, int courseRating, String courseStatus, String fName, String lName,
 			byte[] tutorImage) {
 		super();
 		this.courseId = courseId;
@@ -49,8 +50,17 @@ public class CoursesDTO {
 		this.courseImage = courseImage;
 		this.courseRating = courseRating;
 		this.courseStatus = courseStatus;
-		this.tutorName = tutorName;
+		this.tutorName = fName + ' ' + lName;
 		this.tutorImage = tutorImage;
+	}
+
+	@Override
+	public String toString() {
+		return "CoursesDTO [courseId=" + courseId + ", courseName=" + courseName + ", courseDescription="
+				+ courseDescription + ", coursePrice=" + coursePrice + ", courseDuration=" + courseDuration
+				+ ", courseDate=" + courseDate + ", courseImage=" + Arrays.toString(courseImage) + ", courseRating="
+				+ courseRating + ", courseStatus=" + courseStatus + ", tutorName=" + tutorName + ", tutorImage="
+				+ Arrays.toString(tutorImage) + "]";
 	}
 
 	public int getCourseId() {

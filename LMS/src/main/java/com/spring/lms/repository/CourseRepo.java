@@ -18,13 +18,19 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 	Course findBycourseName(String courseName);
 
 	//@Query("SELECT new com.spring.lms.dto.CoursesDTO(c.courseId, c.courseName, c.courseDuration, c.courseRating, c.courseStatus, c.coursePrice, c.courseImage, u.firstName, u.profileImage)  FROM Course c INNER JOIN Tutor t ON (c.tutor_fk = t.tutor_id) INNER JOIN User u ON (t.user_fk = u.user_id) ")
-	@Query(value = "SELECT c.course_id, c.course_name, c.course_duration,c.course_date,c.course_description, c.course_rating, c.course_status, c.course_price, c.course_image, u.first_name,u.last_name, u.profile_image FROM Course as c INNER JOIN Tutor as t ON (c.tutor_fk = t.tutor_id) INNER JOIN User as u ON (t.user_fk = u.user_id)",nativeQuery = true)
+//	@Query(value = "SELECT c.course_id, c.course_name, c.course_duration,c.course_date,c.course_description, c.course_rating, c.course_status, c.course_price, c.course_image, u.first_name,u.last_name, u.profile_image FROM Course as c INNER JOIN Tutor as t ON (c.tutor_fk = t.tutor_id) INNER JOIN User as u ON (t.user_fk = u.user_id)",nativeQuery = true)
+	@Query("SELECT new com.spring.lms.dto.CoursesDTO(c.courseId, c.courseName, c.courseDescription, c.coursePrice, c.courseDuration, c.courseDate, c.courseImage, c.courseRating, c.courseStatus, u.firstName, u.lastName, u.profileImage) "
+			+ "FROM Course as c "
+			+ "INNER JOIN Tutor as t ON (c.tutor = t.tutor_id) "
+			+ "INNER JOIN User as u ON (t.user = u.user_id)")
 	List<CoursesDTO> getCourses();
 	
-	
-	
-	@Query(value = "SELECT c.course_id, c.course_name,c.course_description,c.course_date, c.course_duration, c.course_rating, c.course_status, c.course_price, c.course_image, u.first_name,u.last_name, u.profile_image FROM Course as c INNER JOIN Tutor as t ON (c.tutor_fk = t.tutor_id) INNER JOIN User as u ON (t.user_fk = u.user_id) WHERE c.course_id = courseId",nativeQuery = true)
-	Course getCourse(int courseId);
+	@Query("SELECT new com.spring.lms.dto.CoursesDTO(c.courseId, c.courseName, c.courseDescription, c.coursePrice, c.courseDuration, c.courseDate, c.courseImage, c.courseRating, c.courseStatus, u.firstName, u.lastName, u.profileImage) "
+			+ " FROM Course as c"
+			+ " INNER JOIN Tutor as t ON (c.tutor = t.tutor_id)"
+			+ " INNER JOIN User as u ON (t.user = u.user_id)"
+			+ " WHERE c.courseId = :courseId")
+	CoursesDTO getCourse(int courseId);
 	
 }
 //	

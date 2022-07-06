@@ -43,7 +43,7 @@ public class CourseController {
 	}
 	
 	@GetMapping("/course/{courseId}")
-	public Course getCourse(@PathVariable int courseId)
+	public CoursesDTO getCourse(@PathVariable int courseId)
 	{
 		return courseService.getCourse(courseId);
 	}

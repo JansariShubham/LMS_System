@@ -18,20 +18,19 @@ import com.spring.lms.repository.TutorRepo;
 
 @Service
 public class CourseService {
-	
+
 	@Autowired
 	private CourseRepo courseRepo;
-	
+
 	@Autowired
 	private TutorRepo tutorRepo;
 
 	public Course saveCourse(Course course) {
-		//Tutor t = course.getTutor();
-		//course.setTutor(t);
-		Tutor tutorId= tutorRepo.findById(course.getTutorId()).orElse(null);
+		// Tutor t = course.getTutor();
+		// course.setTutor(t);
+		Tutor tutorId = tutorRepo.findById(course.getTutorId()).orElse(null);
 		course.setTutor(tutorId);
 		return courseRepo.save(course);
-		
 	}
 
 	public List<CoursesDTO> getCourses() {
@@ -39,7 +38,7 @@ public class CourseService {
 		return courseRepo.getCourses();
 	}
 
-	public Course getCourse(int courseId) {
+	public CoursesDTO getCourse(int courseId) {
 		// TODO Auto-generated method stub
 		return courseRepo.getCourse(courseId);
 	}
@@ -55,18 +54,17 @@ public class CourseService {
 		existingCourse.setCourseName(course.getCourseName());
 		existingCourse.setCourseDescription(course.getCourseDescription());
 		return courseRepo.save(existingCourse);
-		
 	}
 
 	public String deleteCourse(int courseId) {
 		// TODO Auto-generated method stub
-			courseRepo.deleteById(courseId);
-			return "Course Removed!! " + courseId;
+		courseRepo.deleteById(courseId);
+		return "Course Removed!! " + courseId;
 	}
 
 	public boolean savecourseImage(int id, MultipartFile courseImage) {
 		// TODO Auto-generated method stub
-		
+
 		Optional<Course> courseobj = courseRepo.findById(id);
 		if (courseobj.isPresent()) {
 			Course obj = courseobj.get();
@@ -79,9 +77,7 @@ public class CourseService {
 				e.printStackTrace();
 				return false;
 			}
-
 		} else
 			return false;
 	}
-	
 }
