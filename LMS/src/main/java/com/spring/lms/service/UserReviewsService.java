@@ -28,7 +28,7 @@ public class UserReviewsService{
         logger.info(">>> Saving User Review in database");
         userReviewsRepo.save(userReview);
         Optional<Course> upCourse = Optional.ofNullable(updateCourseRating(userReview.getCourseId()));
-        return  upCourse.isPresent() ? userReview : null;
+        return upCourse.isPresent() ? userReview : null;
     }
 
     public Course updateCourseRating(int courseId){
