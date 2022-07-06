@@ -38,27 +38,27 @@ public class TutorController {
 	}*/
 
 	@PostMapping("/tutor")
-	public User addTutor(@RequestParam("instructorData") User instructorData,
+	public User addTutor(@RequestParam("instructorData") String instructorData,
 						 @RequestParam("profileImage") MultipartFile profileImage
 						 ){
 		logger.info("----> INSIDE ADD TUTOR METHOD");
 		logger.info("----> INSTRUCTOR DATA FROM CLIENT SIDE : {}", instructorData);
 		logger.info("----> IMAGE DATA FROM CLIENT SIDE");
 
-		try{
-			User userObj = userService.saveTutor(instructorData);
-			logger.info("----> USER OBJECT SAVED: {}", userObj);
-			if(profileImage != null){
-				logger.info("---> SAVING PROFILE IMAGE...");
-				int tutorId = userObj.getUser_id();
-				boolean resultOfImageSave = userService.saveTutorProfileImage(tutorId, profileImage);
-				logger.info("---> PROFILE IMAGE SAVE STATUS: {}", resultOfImageSave);
-				return resultOfImageSave ? userObj : null;
-			}
-			return userObj;
-		}catch(Exception e){
-			logger.info("----> ERROR DURING SAVING INSTRUCTOR DATA: {}", e.getMessage());
-		}
+//		try{
+//			User userObj = userService.saveTutor(instructorData);
+//			logger.info("----> USER OBJECT SAVED: {}", userObj);
+//			if(profileImage != null){
+//				logger.info("---> SAVING PROFILE IMAGE...");
+//				int tutorId = userObj.getUser_id();
+//				boolean resultOfImageSave = userService.saveTutorProfileImage(tutorId, profileImage);
+//				logger.info("---> PROFILE IMAGE SAVE STATUS: {}", resultOfImageSave);
+//				return resultOfImageSave ? userObj : null;
+//			}
+//			return userObj;
+//		}catch(Exception e){
+//			logger.info("----> ERROR DURING SAVING INSTRUCTOR DATA: {}", e.getMessage());
+//		}
 		return null;
 	}
 
