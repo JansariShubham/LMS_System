@@ -23,59 +23,46 @@ import com.spring.lms.service.CourseService;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class CourseController {
-	
+
 	@Autowired
 	private CourseService courseService;
-	
+
 	@PostMapping("/course")
-	public Course saveCourse(@RequestBody Course course)
-	{
-		 return courseService.saveCourse(course);
+	public Course saveCourse(@RequestBody Course course) {
+		return courseService.saveCourse(course);
 		// System.out.println(course.getChapters());
-			
 	}
-	
-	
+
 	@GetMapping("/course")
-	public List<CoursesDTO> getCourse()
-	{
+	public List<CoursesDTO> getCourse() {
 		return courseService.getCourses();
 	}
-	
+
 	@GetMapping("/course/{courseId}")
-	public CoursesDTO getCourse(@PathVariable int courseId)
-	{
+	public CoursesDTO getCourse(@PathVariable int courseId) {
 		return courseService.getCourse(courseId);
 	}
-	
+
 //	@GetMapping("/course/{courseName}")
 //	public Course getCourseByName(@PathVariable String courseName)
 //	{
 //		return courseService.getCourseByName(courseName);
 //	}
-	
+
 	@PutMapping("/course")
-	public Course updateCourse(@RequestBody Course course)
-	{
+	public Course updateCourse(@RequestBody Course course) {
 		return courseService.updateCourse(course);
 	}
-	
+
 	@DeleteMapping("/course/{courseId}")
-	public String deleteCourse(@PathVariable int courseId)
-	{
-			return courseService.deleteCourse(courseId);
+	public String deleteCourse(@PathVariable int courseId) {
+		return courseService.deleteCourse(courseId);
 	}
-	
-	
+
 	@PostMapping("/course/save-course/{id}")
-	public boolean uploadCourseImage(@PathVariable("id") int id,
-			@RequestParam("courseImage") MultipartFile courseImage) throws IOException {
+	public boolean uploadCourseImage(@PathVariable("id") int id, @RequestParam("courseImage") MultipartFile courseImage)
+			throws IOException {
 		System.out.println("\nUpload course  image called....\n");
 		return courseService.savecourseImage(id, courseImage);
 	}
-	
-	
-		
-
-	
 }
