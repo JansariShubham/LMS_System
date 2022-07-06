@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.lms.dto.CoursesDTO;
 import com.spring.lms.model.Chapters;
 import com.spring.lms.model.Course;
 import com.spring.lms.model.Tutor;
@@ -33,14 +34,14 @@ public class CourseService {
 		
 	}
 
-	public List<Course> getCourses() {
+	public List<CoursesDTO> getCourses() {
 		// TODO Auto-generated method stub
-		return courseRepo.findAll();
+		return courseRepo.getCourses();
 	}
 
 	public Course getCourse(int courseId) {
 		// TODO Auto-generated method stub
-		return courseRepo.findById(courseId).orElse(null);
+		return courseRepo.getCourse(courseId);
 	}
 
 //	public Course getCourseByName(String courseName) {

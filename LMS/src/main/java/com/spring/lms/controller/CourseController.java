@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.lms.dto.CoursesDTO;
 import com.spring.lms.model.Chapters;
 import com.spring.lms.model.Course;
 import com.spring.lms.service.CourseService;
@@ -36,7 +37,7 @@ public class CourseController {
 	
 	
 	@GetMapping("/course")
-	public List<Course> getCourse()
+	public List<CoursesDTO> getCourse()
 	{
 		return courseService.getCourses();
 	}
