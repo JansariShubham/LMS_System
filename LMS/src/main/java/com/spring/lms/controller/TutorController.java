@@ -29,38 +29,38 @@ public class TutorController {
 
 	private Logger logger = LoggerFactory.getLogger(TutorController.class);
 
-	/*@PostMapping("/tutor/{profileImage}")
-	public User addTutor(@RequestBody User user,@PathVariable ("profileImage") MultipartFile file ) throws IOException {
-		System.out.println("in add tutor");
-		User userobj=userService.saveTutor(user);
-		userService.saveTutorProfileImage(userobj.getUser_id(), file);
-		return userobj;
-	}*/
-
 	@PostMapping("/tutor")
-	public User addTutor(@RequestParam("instructorData") String instructorData,
-						 @RequestParam("profileImage") MultipartFile profileImage
-						 ){
-		logger.info("----> INSIDE ADD TUTOR METHOD");
-		logger.info("----> INSTRUCTOR DATA FROM CLIENT SIDE : {}", instructorData);
-		logger.info("----> IMAGE DATA FROM CLIENT SIDE");
-
-//		try{
-//			User userObj = userService.saveTutor(instructorData);
-//			logger.info("----> USER OBJECT SAVED: {}", userObj);
-//			if(profileImage != null){
-//				logger.info("---> SAVING PROFILE IMAGE...");
-//				int tutorId = userObj.getUser_id();
-//				boolean resultOfImageSave = userService.saveTutorProfileImage(tutorId, profileImage);
-//				logger.info("---> PROFILE IMAGE SAVE STATUS: {}", resultOfImageSave);
-//				return resultOfImageSave ? userObj : null;
-//			}
-//			return userObj;
-//		}catch(Exception e){
-//			logger.info("----> ERROR DURING SAVING INSTRUCTOR DATA: {}", e.getMessage());
-//		}
-		return null;
+	public User addTutor(@RequestBody User user) throws IOException {
+		System.out.println("in add tutor");
+		
+		return userService.saveTutor(user);
+		 
 	}
+
+//	@PostMapping("/tutor")
+//	public User addTutor(@RequestParam("instructorData") String instructorData,
+//						 @RequestParam("profileImage") MultipartFile profileImage
+//						 ){
+//		logger.info("----> INSIDE ADD TUTOR METHOD");
+//		logger.info("----> INSTRUCTOR DATA FROM CLIENT SIDE : {}", instructorData);
+//		logger.info("----> IMAGE DATA FROM CLIENT SIDE");
+//
+////		try{
+////			User userObj = userService.saveTutor(instructorData);
+////			logger.info("----> USER OBJECT SAVED: {}", userObj);
+////			if(profileImage != null){
+////				logger.info("---> SAVING PROFILE IMAGE...");
+////				int tutorId = userObj.getUser_id();
+////				boolean resultOfImageSave = userService.saveTutorProfileImage(tutorId, profileImage);
+////				logger.info("---> PROFILE IMAGE SAVE STATUS: {}", resultOfImageSave);
+////				return resultOfImageSave ? userObj : null;
+////			}
+////			return userObj;
+////		}catch(Exception e){
+////			logger.info("----> ERROR DURING SAVING INSTRUCTOR DATA: {}", e.getMessage());
+////		}
+//		return null;
+//	}
 
 	@GetMapping("/tutor")
 	public List<User> getTutors() {
@@ -85,11 +85,11 @@ public class TutorController {
 		return userService.deleteTutor(user_id);
 	}
 
-//	@PostMapping("/tutor/save-tutor/{id}")
-//	public boolean uploadTutorImage(@PathVariable("id") int id,
-//			@RequestParam("profileImage") MultipartFile profileImage) throws IOException {
-//		System.out.println("\nUpload tutor profile image called....\n");
-//		return userService.saveTutorProfileImage(id, profileImage);
-//	}
+	@PostMapping("/tutor/save-tutor/{id}")
+	public boolean uploadTutorImage(@PathVariable("id") int id,
+			@RequestParam("profileImage") MultipartFile profileImage) throws IOException {
+		System.out.println("\nUpload tutor profile image called....\n");
+		return userService.saveTutorProfileImage(id, profileImage);
+	}
 
 }
