@@ -79,6 +79,8 @@ public class CourseService {
 	}
 
 	public Optional<Course> getCourseDetailsById(int courseId) {
-		return courseRepo.findByCourseId(courseId);
+		Optional<Course> gcCourse = courseRepo.findByCourseId(courseId);
+		System.out.println("\n\n GC Course: " + gcCourse);
+		return gcCourse;
 	}
 }
