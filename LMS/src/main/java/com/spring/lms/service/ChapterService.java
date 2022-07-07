@@ -8,15 +8,25 @@ import org.springframework.stereotype.Service;
 import com.spring.lms.model.Chapters;
 import com.spring.lms.model.Course;
 import com.spring.lms.repository.ChaptersRepo;
+import com.spring.lms.repository.CourseRepo;
 
 @Service
 public class ChapterService {
 	
 	@Autowired
 	private ChaptersRepo chapRepo;
+	
+	@Autowired
+	private CourseRepo courseRepo;
+	
+	
 
 	public Chapters saveChapters(Chapters chapter) {
 		// TODO Auto-generated method stub
+////		Course course = new Course();
+//		Course course = courseRepo.findById(chapter.getCourseId()).orElse(null);
+//		chapter.setCourseId(course);
+//		course.setChapters(chapters);
 		return chapRepo.save(chapter);
 	}
 
@@ -50,5 +60,11 @@ public class ChapterService {
 		 chapRepo.deleteById(chapterId);
 		 return "Chapter Deleted!! " + chapterId;
 	}
+
+	public List<Chapters> getChaptersList(int courseId) {
+		// TODO Auto-generated method stub
+		return (List<Chapters>) chapRepo.findByCourseId(courseId);
+	}
+	
 
 }

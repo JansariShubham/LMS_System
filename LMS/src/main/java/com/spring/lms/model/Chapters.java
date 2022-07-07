@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Chapters implements Serializable{
@@ -28,6 +29,9 @@ public class Chapters implements Serializable{
 
 	@Column(nullable = false)
 	private Date chapterDate;
+	
+//	@Transient
+//	private int courseId;
 
 	public int getChapterId() {
 		return chapterId;
@@ -60,5 +64,14 @@ public class Chapters implements Serializable{
 	public void setChapterDate(Date chapterDate) {
 		this.chapterDate = chapterDate;
 	}
+
+//	public int getCourseId() {
+//		return courseId;
+//	}
+//
+//	public void setCourseId(int courseId) {
+//		this.courseId = courseId;
+//	}
+	
 
 }

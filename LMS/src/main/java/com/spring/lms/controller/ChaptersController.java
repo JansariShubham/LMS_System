@@ -61,5 +61,11 @@ public class ChaptersController {
 			return chapterService.deleteChapter(chapterId);
 	}
 		
+	@GetMapping("/chapter/{courseId}")
+	public List<Chapters> getChaptersList(@PathVariable int courseId)
+	{
+			return chapterService.getChaptersList(courseId);
+	}
+
 
 }
