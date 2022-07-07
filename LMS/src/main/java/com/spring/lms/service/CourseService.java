@@ -79,6 +79,6 @@ public class CourseService {
 	}
 
 	public Optional<Course> getCourseDetailsById(int courseId) {
-		return courseRepo.findById(courseId);
+		return courseRepo.findByCourseId(courseId);
 	}
 }

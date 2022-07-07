@@ -1,6 +1,7 @@
 package com.spring.lms.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
@@ -28,5 +29,7 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 			+ " INNER JOIN Tutor as t ON (c.tutor = t.tutor_id)"
 			+ " INNER JOIN User as u ON (t.user = u.user_id)"
 			+ " WHERE c.courseId = :courseId")
-	CoursesDTO getCourse(int courseId);	
+	CoursesDTO getCourse(int courseId);
+
+	Optional<Course> findByCourseId(int courseId);
 }
