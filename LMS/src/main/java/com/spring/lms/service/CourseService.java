@@ -8,11 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.lms.dto.CoursesDTO;
-import com.spring.lms.model.Chapters;
 import com.spring.lms.model.Course;
 import com.spring.lms.model.Tutor;
-import com.spring.lms.model.User;
-import com.spring.lms.repository.ChaptersRepo;
 import com.spring.lms.repository.CourseRepo;
 import com.spring.lms.repository.TutorRepo;
 
@@ -79,5 +76,9 @@ public class CourseService {
 			}
 		} else
 			return false;
+	}
+
+	public Optional<Course> getCourseDetailsById(int courseId) {
+		return courseRepo.findById(courseId);
 	}
 }

@@ -27,18 +27,25 @@ public class UserReviewsService{
         userReview.setReviewDate(new Date());
         logger.info(">>> Saving User Review in database");
         userReviewsRepo.save(userReview);
-        Optional<Course> upCourse = Optional.ofNullable(updateCourseRating(userReview.getCourseId()));
+        Optional<Course> upCourse = updateCourseRating(userReview.getCourseId());
         return upCourse.isPresent() ? userReview : null;
     }
 
-    public Course updateCourseRating(int courseId){
-        Integer[] sumAndCount = (Integer[]) userReviewsRepo.countTotalByCourseId(courseId);
-        int courseRating = Math.round(sumAndCount[0] / sumAndCount[1]);
-        logger.info(">>> Total Rating , User {} , {}", sumAndCount[0], sumAndCount[1]);
-        logger.info(">>> Course Rating: {}", courseRating);
-        Course getCourse = courseService.getCourse(courseId);
-        getCourse.setCourseRating(courseRating);
-        getCourse = courseService.updateCourse(getCourse);
+    public Optional<Course> updateCourseRating(int courseId){
+
+        List<List<Integer>> getTotalRatingWithUser = userReviewsRepo.countTotalByCourseId(courseId);
+        int totalRating = getTotalRatingWithUser.get(0).get(0);
+        int totalUser = getTotalRatingWithUser.get(0).get(1);
+
+        logger.info(">>> Total Rating , User {} , {}", totalRating, totalUser);
+        Optional<Course> getCourse = courseService.getCourseDetailsById(courseId);
+        int updateRating = Math.round(totalRating / totalUser);
+
+        getCourse.get().setCourseRating(updateRating);
+        logger.info(">>> Course Rating: {}", updateRating);
+
+        logger.info(">> UPDATING COURSE RATING ");
+        courseService.updateCourse(getCourse.get());
         return getCourse;
     }
 
@@ -51,7 +58,7 @@ public class UserReviewsService{
         logger.info(">>> REmoving review from database");
         Optional<UserReviews> userReview = userReviewsRepo.findById(reviewId);
         userReviewsRepo.deleteById(reviewId);
-        Optional<Course> upCourse = Optional.ofNullable(updateCourseRating(userReview.get().getCourseId()));
+        Optional<Course> upCourse = updateCourseRating(userReview.get().getCourseId());
         return  upCourse.isPresent();
     }
 }
