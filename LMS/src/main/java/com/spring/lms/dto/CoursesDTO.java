@@ -2,9 +2,12 @@ package com.spring.lms.dto;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Lob;
+
+import com.spring.lms.model.Chapters;
 
 public class CoursesDTO {
 	// c.course_id, c.course_name, c.course_duration, c.course_rating,
@@ -33,8 +36,9 @@ public class CoursesDTO {
 
 	private byte[] tutorImage;
 
-	public CoursesDTO() {
+	private List<Chapters> chapters;
 
+	public CoursesDTO() {
 	}
 
 	public CoursesDTO(int courseId, String courseName, String courseDescription, int coursePrice, int courseDuration,
@@ -53,14 +57,13 @@ public class CoursesDTO {
 		this.tutorName = fName + ' ' + lName;
 		this.tutorImage = tutorImage;
 	}
+	
+	public List<Chapters> getChapters() {
+		return chapters;
+	}
 
-	@Override
-	public String toString() {
-		return "CoursesDTO [courseId=" + courseId + ", courseName=" + courseName + ", courseDescription="
-				+ courseDescription + ", coursePrice=" + coursePrice + ", courseDuration=" + courseDuration
-				+ ", courseDate=" + courseDate + ", courseImage=" + Arrays.toString(courseImage) + ", courseRating="
-				+ courseRating + ", courseStatus=" + courseStatus + ", tutorName=" + tutorName + ", tutorImage="
-				+ Arrays.toString(tutorImage) + "]";
+	public void setChapters(List<Chapters> chapters) {
+		this.chapters = chapters;
 	}
 
 	public int getCourseId() {

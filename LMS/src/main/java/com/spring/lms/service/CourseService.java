@@ -1,7 +1,10 @@
 package com.spring.lms.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ import com.spring.lms.repository.TutorRepo;
 @Service
 public class CourseService {
 
+	@Autowired
+	private ChapterService chapterService;
+	
 	@Autowired
 	private CourseRepo courseRepo;
 
@@ -32,12 +38,19 @@ public class CourseService {
 
 	public List<CoursesDTO> getCourses() {
 		// TODO Auto-generated method stub
-		return courseRepo.getCourses();
+		List<CoursesDTO> list = courseRepo.getCourses();
+		list.stream().map(l -> {
+			l.setChapters(chapterService.getChaptersList(l.getCourseId()));
+			return l;
+		}).collect(Collectors.toList());
+		return list;
 	}
 
 	public CoursesDTO getCourse(int courseId) {
 		// TODO Auto-generated method stub
-		return courseRepo.getCourse(courseId);
+		CoursesDTO course = courseRepo.getCourse(courseId);
+		course.setChapters(chapterService.getChaptersList(course.getCourseId()));
+		return course;
 	}
 
 //	public Course getCourseByName(String courseName) {
