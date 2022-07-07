@@ -14,4 +14,6 @@ public interface UserReviewsRepo extends JpaRepository<UserReviews, Integer> {
     List<List<Integer>> countTotalByCourseId(Integer courseId);
 
     List<UserReviews> findByCourseId(Integer courseId);
+
+    void deleteByReviewId(Integer reviewId);
 }
