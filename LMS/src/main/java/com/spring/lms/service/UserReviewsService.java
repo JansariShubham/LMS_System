@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserReviewsService{
 
@@ -53,7 +55,7 @@ public class UserReviewsService{
         logger.info(">>> Fetching all user review from database");
         return userReviewsRepo.findByCourseId(courseId);
     }
-
+    @Transactional
     public boolean removeUserReviewFromCourse(Integer reviewId) {
         logger.info(">>> REmoving review from database");
         Optional<UserReviews> userReview = userReviewsRepo.findById(reviewId);

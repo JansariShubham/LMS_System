@@ -27,7 +27,7 @@ public class UserReviewsController {
 
     }
 
-    @DeleteMapping("/reviewId")
+    @DeleteMapping("/{reviewId}")
     public boolean removeUserReview(@PathVariable Integer reviewId){
         return userReviewsService.removeUserReviewFromCourse(reviewId);
     }
