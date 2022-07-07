@@ -57,8 +57,11 @@ public class UserReviewsService{
     public boolean removeUserReviewFromCourse(Integer reviewId) {
         logger.info(">>> REmoving review from database");
         Optional<UserReviews> userReview = userReviewsRepo.findById(reviewId);
-        userReviewsRepo.deleteById(reviewId);
-        Optional<Course> upCourse = updateCourseRating(userReview.get().getCourseId());
+        int courseId = userReview.get().getCourseId();
+        System.out.println(userReview);
+        userReviewsRepo.deleteByReviewId(reviewId);
+        System.out.println("\n\n >>> REview ID removed");
+        Optional<Course> upCourse = updateCourseRating(courseId);
         return  upCourse.isPresent();
     }
 }
