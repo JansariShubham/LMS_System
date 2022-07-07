@@ -43,9 +43,12 @@ public class Course implements Serializable {
 	private int courseRating;
 
 	private String courseStatus;
-	
+
 	@Transient
 	private int tutorId;
+
+	@Transient
+	private int userId;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "tutor_fk")
@@ -54,10 +57,6 @@ public class Course implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "course_fk", referencedColumnName = "courseId")
 	private List<Chapters> chapters;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "course_fk", referencedColumnName = "courseId")
-	private List<Enrollment> enrollment;
 
 	public List<Chapters> getChapters() {
 		return chapters;
@@ -147,14 +146,6 @@ public class Course implements Serializable {
 		this.tutor = tutor;
 	}
 
-	public List<Enrollment> getEnrollment() {
-		return enrollment;
-	}
-
-	public void setEnrollment(List<Enrollment> enrollment) {
-		this.enrollment = enrollment;
-	}
-
 	public int getTutorId() {
 		return tutorId;
 	}
@@ -162,8 +153,13 @@ public class Course implements Serializable {
 	public void setTutorId(int tutorId) {
 		this.tutorId = tutorId;
 	}
-	
-	
-	
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 }

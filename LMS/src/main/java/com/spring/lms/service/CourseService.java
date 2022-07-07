@@ -31,8 +31,10 @@ public class CourseService {
 	public Course saveCourse(Course course) {
 		// Tutor t = course.getTutor();
 		// course.setTutor(t);
-		Tutor tutorId = tutorRepo.findById(course.getTutorId()).orElse(null);
-		course.setTutor(tutorId);
+		int userId = course.getUserId();
+		int tutorId = tutorRepo.findTutorByUserId(userId);
+		Tutor tutor = tutorRepo.findById(tutorId).orElse(null);
+		course.setTutor(tutor);
 		return courseRepo.save(course);
 	}
 

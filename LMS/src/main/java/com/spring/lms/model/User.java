@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.*;
 //import javax.persistence.CascadeType;
 
-
 @Entity
 public class User {
 	@Id
@@ -40,13 +39,8 @@ public class User {
 	@Column(name = "profile_image", length = Integer.MAX_VALUE)
 	byte[] profileImage;
 
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	private Tutor tutor;
-	
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_fk", referencedColumnName = "user_id")
-	private List<Enrollment> enrollment;
 
 	public boolean isEmailError() {
 		return emailError;
@@ -127,15 +121,6 @@ public class User {
 	public void setProfileImage(byte[] profileImage) {
 		this.profileImage = profileImage;
 	}
-
-	public List<Enrollment> getEnrollment() {
-		return enrollment;
-	}
-
-	public void setEnrollment(List<Enrollment> enrollment) {
-		this.enrollment = enrollment;
-	}
-	
 
 //	public Tutor getTutor() {
 //		return tutor;

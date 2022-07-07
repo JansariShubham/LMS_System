@@ -1,5 +1,7 @@
 package com.spring.lms.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -28,8 +30,8 @@ public class Tutor {
 	@JoinColumn(name = "user_fk")
 	private User user;
 	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "tutor")
-	private Course course;
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "tutor")
+	private List<Course> course;
 //
 //	@Lob
 //	@Column(name = "tutor_image", length = Integer.MAX_VALUE, nullable = true)
