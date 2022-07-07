@@ -36,6 +36,9 @@ public class UserReviewsService{
     public Optional<Course> updateCourseRating(int courseId){
 
         List<List<Integer>> getTotalRatingWithUser = userReviewsRepo.countTotalByCourseId(courseId);
+
+        if(getTotalRatingWithUser == null) return Optional.empty();
+
         int totalRating = getTotalRatingWithUser.get(0).get(0);
         int totalUser = getTotalRatingWithUser.get(0).get(1);
 
@@ -64,6 +67,6 @@ public class UserReviewsService{
         userReviewsRepo.deleteByReviewId(reviewId);
         System.out.println("\n\n >>> REview ID removed");
         Optional<Course> upCourse = updateCourseRating(courseId);
-        return  upCourse.isPresent();
+        return true;
     }
 }
