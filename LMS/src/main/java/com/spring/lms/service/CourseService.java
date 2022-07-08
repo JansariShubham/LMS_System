@@ -35,6 +35,7 @@ public class CourseService {
 		int tutorId = tutorRepo.findTutorByUserId(userId);
 		Tutor tutor = tutorRepo.findById(tutorId).orElse(null);
 		course.setTutor(tutor);
+		System.out.println("save course!");
 		return courseRepo.save(course);
 	}
 
