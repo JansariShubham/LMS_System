@@ -44,8 +44,7 @@ public class Course implements Serializable {
 
 	private String courseStatus;
 
-	@Transient
-	private int tutorId;
+	
 
 	@Transient
 	private int userId;
@@ -144,14 +143,6 @@ public class Course implements Serializable {
 
 	public void setTutor(Tutor tutor) {
 		this.tutor = tutor;
-	}
-
-	public int getTutorId() {
-		return tutorId;
-	}
-
-	public void setTutorId(int tutorId) {
-		this.tutorId = tutorId;
 	}
 
 	public int getUserId() {

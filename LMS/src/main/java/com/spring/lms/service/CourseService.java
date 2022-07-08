@@ -71,7 +71,7 @@ public class CourseService {
 	public String deleteCourse(int courseId) {
 		// TODO Auto-generated method stub
 		courseRepo.deleteById(courseId);
-		return "Course Removed!! " + courseId;
+		return null;
 	}
 
 	public boolean savecourseImage(int id, MultipartFile courseImage) {
