@@ -122,11 +122,4 @@ public class User {
 		this.profileImage = profileImage;
 	}
 
-//	public Tutor getTutor() {
-//		return tutor;
-//	}
-//
-//	public void setTutor(Tutor tutor) {
-//		this.tutor = tutor;
-//	}
 }

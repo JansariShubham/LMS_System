@@ -4,7 +4,9 @@ import java.io.Serializable;
 //import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
-public class Chapters implements Serializable{
+public class Chapters implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,9 +33,13 @@ public class Chapters implements Serializable{
 	@Column(nullable = false)
 	private Date chapterDate;
 	
-	
-//	@Transient
-//	private int courseId;
+
+	@Transient
+	private int courseId;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "course_fk")
+	private Course course;
 
 	public int getChapterId() {
 		return chapterId;
@@ -66,13 +73,20 @@ public class Chapters implements Serializable{
 		this.chapterDate = chapterDate;
 	}
 
-//	public int getCourseId() {
-//		return courseId;
-//	}
-//
-//	public void setCourseId(int courseId) {
-//		this.courseId = courseId;
-//	}
-	
+	public int getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 
 }

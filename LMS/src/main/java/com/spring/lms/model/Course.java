@@ -44,8 +44,6 @@ public class Course implements Serializable {
 
 	private String courseStatus;
 
-	
-
 	@Transient
 	private int userId;
 
@@ -53,17 +51,8 @@ public class Course implements Serializable {
 	@JoinColumn(name = "tutor_fk")
 	private Tutor tutor;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "course_fk", referencedColumnName = "courseId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private List<Chapters> chapters;
-
-	public List<Chapters> getChapters() {
-		return chapters;
-	}
-
-	public void setChapters(List<Chapters> chapters) {
-		this.chapters = chapters;
-	}
 
 	public int getCourseId() {
 		return courseId;

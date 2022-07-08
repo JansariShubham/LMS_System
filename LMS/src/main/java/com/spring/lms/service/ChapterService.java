@@ -19,14 +19,9 @@ public class ChapterService {
 	@Autowired
 	private CourseRepo courseRepo;
 	
-	
-
 	public Chapters saveChapters(Chapters chapter) {
-		// TODO Auto-generated method stub
-////		Course course = new Course();
-//		Course course = courseRepo.findById(chapter.getCourseId()).orElse(null);
-//		chapter.setCourseId(course);
-//		course.setChapters(chapters);
+		Course courseId = courseRepo.findById(chapter.getCourseId()).orElse(null);
+		chapter.setCourse(courseId);
 		return chapRepo.save(chapter);
 	}
 
