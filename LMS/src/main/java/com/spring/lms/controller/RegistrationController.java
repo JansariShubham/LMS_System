@@ -16,7 +16,6 @@ public class RegistrationController {
 	@Autowired
 	UserService userService;
 	
-	
 	@PostMapping("/register")
 	public User register(@RequestBody User user)
 	{
@@ -25,9 +24,7 @@ public class RegistrationController {
 	
 	@PostMapping("/login")
 	public User login(@RequestBody User user) {
-		
-		return userService.login(user);
-		
+		return userService.login(user);	
 	}
 
 }

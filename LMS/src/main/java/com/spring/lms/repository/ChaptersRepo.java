@@ -12,10 +12,7 @@ import com.spring.lms.model.Chapters;
 @Repository
 public interface ChaptersRepo extends JpaRepository<Chapters, Integer> {
 
-
 	Chapters findBychapterName(String chapterName);
-	
-	@Query(value = "SELECT c.chapter_id, c.chapter_date, c.chapter_name, c.chapterlink FROM chapters as c WHERE c.course_fk = :courseId", nativeQuery = true )
-	List<Chapters> findByCourseId(int courseId);
 
+	List<Chapters> findByCourseCourseId(int courseId);
 }

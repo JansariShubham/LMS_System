@@ -9,12 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.spring.lms.model.User;
 
 @Repository
-public interface RegistartionRepo extends JpaRepository<User,Integer>{
+public interface RegistartionRepo extends JpaRepository<User, Integer> {
 
 	User findByEmailId(String emailId);
 
 	List<User> findByrole(String role);
-	
-	
-
 }

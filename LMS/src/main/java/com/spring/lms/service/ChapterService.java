@@ -12,13 +12,13 @@ import com.spring.lms.repository.CourseRepo;
 
 @Service
 public class ChapterService {
-	
+
 	@Autowired
 	private ChaptersRepo chapRepo;
-	
+
 	@Autowired
 	private CourseRepo courseRepo;
-	
+
 	public Chapters saveChapters(Chapters chapter) {
 		Course courseId = courseRepo.findById(chapter.getCourseId()).orElse(null);
 		chapter.setCourse(courseId);
@@ -52,14 +52,12 @@ public class ChapterService {
 
 	public String deleteChapter(int chapterId) {
 		// TODO Auto-generated method stub
-		 chapRepo.deleteById(chapterId);
-		 return "Chapter Deleted!! " + chapterId;
+		chapRepo.deleteById(chapterId);
+		return "Chapter Deleted!! " + chapterId;
 	}
 
 	public List<Chapters> getChaptersList(int courseId) {
 		// TODO Auto-generated method stub
-		return (List<Chapters>) chapRepo.findByCourseId(courseId);
+		return (List<Chapters>) chapRepo.findByCourseCourseId(courseId);
 	}
-	
-
 }
