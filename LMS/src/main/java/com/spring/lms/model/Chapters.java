@@ -32,7 +32,6 @@ public class Chapters implements Serializable {
 
 	@Column(nullable = false)
 	private Date chapterDate;
-	
 
 	@Transient
 	private int courseId;

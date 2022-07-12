@@ -42,6 +42,9 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	private Tutor tutor;
 
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Course> course;
+
 	public boolean isEmailError() {
 		return emailError;
 	}
@@ -120,6 +123,14 @@ public class User {
 
 	public void setProfileImage(byte[] profileImage) {
 		this.profileImage = profileImage;
+	}
+
+	public List<Course> getCourse() {
+		return course;
+	}
+
+	public void setCourse(List<Course> course) {
+		this.course = course;
 	}
 
 }
