@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,5 +34,10 @@ public class NewsLetterService {
 
     public void removeUserFromNewsLetter(String email){
         newsLetterRepository.deleteByEmail(email);
+    }
+
+    public List<String> listAllEmailAddressFromNewsLetter(){
+        logger.info("---> Listing all email address from news letter");
+        return newsLetterRepository.getAllEmailAddressFromNewsLetter();
     }
 }
