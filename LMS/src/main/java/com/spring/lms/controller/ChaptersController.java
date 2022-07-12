@@ -43,11 +43,11 @@ public class ChaptersController {
 		return chapterService.getChapter(chapterId);
 	}
 	
-	@GetMapping("/chapters/{chapterName}")
-	public Chapters getChapterByName(@PathVariable String chapterName)
-	{
-		return chapterService.getChapterByName(chapterName);
-	}
+//	@GetMapping("/chapters/{chapterName}")
+//	public Chapters getChapterByName(@PathVariable String chapterName)
+//	{
+//		return chapterService.getChapterByName(chapterName);
+//	}
 	
 	@PutMapping("/chapters")
 	public Chapters updateCourse(@RequestBody Chapters chapter)
