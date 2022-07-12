@@ -52,7 +52,7 @@ public class Course implements Serializable {
 	@JoinColumn(name = "tutor_fk")
 	private Tutor tutor;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "course")
 	private List<Chapters> chapters;
 
 	@ManyToMany(cascade = CascadeType.ALL)

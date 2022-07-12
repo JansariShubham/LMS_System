@@ -36,7 +36,7 @@ public class Chapters implements Serializable {
 	@Transient
 	private int courseId;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "course_fk")
 	private Course course;
 

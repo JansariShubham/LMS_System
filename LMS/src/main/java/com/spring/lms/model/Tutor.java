@@ -26,11 +26,11 @@ public class Tutor {
 //	@Column(nullable = false)
 //	private String password;
 //	
-	@OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.PERSIST , orphanRemoval = true)
 	@JoinColumn(name = "user_fk")
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "tutor")
+	@OneToMany(cascade = CascadeType.PERSIST,mappedBy = "tutor")
 	private List<Course> course;
 //
 //	@Lob

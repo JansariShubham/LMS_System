@@ -39,10 +39,10 @@ public class User {
 	@Column(name = "profile_image", length = Integer.MAX_VALUE)
 	byte[] profileImage;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "user")
 	private Tutor tutor;
 
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
 	private List<Course> course;
 
 	public boolean isEmailError() {
