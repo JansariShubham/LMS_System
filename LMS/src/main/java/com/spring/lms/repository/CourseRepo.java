@@ -32,4 +32,14 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 	CoursesDTO getCourse(int courseId);
 
 	Optional<Course> findByCourseId(int courseId);
+
+	/**
+	Method to get all user email address
+	 */
+
+	@Query(
+			"SELECT u.emailId FROM User as u WHERE u.role = 'user'"
+	)
+	List<String> getAllEmailAddressFromUserData();
+
 }

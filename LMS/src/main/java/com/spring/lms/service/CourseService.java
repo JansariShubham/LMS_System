@@ -99,4 +99,8 @@ public class CourseService {
 		System.out.println("\n\n GC Course: " + gcCourse);
 		return gcCourse;
 	}
+
+	public List<String> listAllUserEmailFromUser(){
+		return courseRepo.getAllEmailAddressFromUserData();
+	}
 }
