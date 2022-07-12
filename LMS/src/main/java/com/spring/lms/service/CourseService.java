@@ -100,7 +100,5 @@ public class CourseService {
 		return gcCourse;
 	}
 
-	public List<String> listAllUserEmailFromUser(){
-		return courseRepo.getAllEmailAddressFromUserData();
-	}
+
 }

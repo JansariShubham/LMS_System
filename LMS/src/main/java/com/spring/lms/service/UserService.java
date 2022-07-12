@@ -194,4 +194,8 @@ public class UserService {
 		} else
 			return false;
 	}
+
+	public List<String> listAllUserEmailFromUser(){
+		return repo.getAllEmailAddressFromUserData();
+	}
 }
