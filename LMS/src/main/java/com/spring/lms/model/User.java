@@ -42,8 +42,8 @@ public class User {
 	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "user")
 	private Tutor tutor;
 
-	@ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
-	private List<Course> course;
+//	@ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+//	private List<Course> course;
 
 	public boolean isEmailError() {
 		return emailError;
@@ -125,12 +125,12 @@ public class User {
 		this.profileImage = profileImage;
 	}
 
-	public List<Course> getCourse() {
-		return course;
-	}
-
-	public void setCourse(List<Course> course) {
-		this.course = course;
-	}
+//	public List<Course> getCourse() {
+//		return course;
+//	}
+//
+//	public void setCourse(List<Course> course) {
+//		this.course = course;
+//	}
 
 }

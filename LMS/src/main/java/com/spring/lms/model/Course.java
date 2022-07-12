@@ -52,11 +52,11 @@ public class Course implements Serializable {
 	@JoinColumn(name = "tutor_fk")
 	private Tutor tutor;
 
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "course")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private List<Chapters> chapters;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<User> user;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	private List<User> user;
 
 	public int getCourseId() {
 		return courseId;
@@ -146,12 +146,12 @@ public class Course implements Serializable {
 		this.userId = userId;
 	}
 
-	public List<User> getUser() {
-		return user;
-	}
-
-	public void setUser(List<User> user) {
-		this.user = user;
-	}
+//	public List<User> getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(List<User> user) {
+//		this.user = user;
+//	}
 
 }
