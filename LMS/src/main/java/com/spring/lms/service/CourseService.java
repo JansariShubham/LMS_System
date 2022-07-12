@@ -1,9 +1,7 @@
 package com.spring.lms.service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,9 @@ public class CourseService {
 	
 	@Autowired
 	private CourseRepo courseRepo;
+	
+	@Autowired
+	private UserReviewsService userReviewsService;
 
 	@Autowired
 	private TutorRepo tutorRepo;
@@ -44,6 +45,7 @@ public class CourseService {
 		List<CoursesDTO> list = courseRepo.getCourses();
 		list.stream().map(l -> {
 			l.setChapters(chapterService.getChaptersList(l.getCourseId()));
+			l.setReviews(userReviewsService.loadAllUserReviewForCourse(l.getCourseId()));
 			return l;
 		}).collect(Collectors.toList());
 		return list;
@@ -53,6 +55,7 @@ public class CourseService {
 		// TODO Auto-generated method stub
 		CoursesDTO course = courseRepo.getCourse(courseId);
 		course.setChapters(chapterService.getChaptersList(course.getCourseId()));
+		course.setReviews(userReviewsService.loadAllUserReviewForCourse(course.getCourseId()));
 		return course;
 	}
 

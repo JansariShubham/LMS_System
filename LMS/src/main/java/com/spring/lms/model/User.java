@@ -44,6 +44,17 @@ public class User {
 
 //	@ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
 //	private List<Course> course;
+	
+	@Transient
+	private int[] myCourses;
+	
+	public int[] getMyCourses() {
+		return myCourses;
+	}
+
+	public void setMyCourses(int[] myCourses) {
+		this.myCourses = myCourses;
+	}
 
 	public boolean isEmailError() {
 		return emailError;

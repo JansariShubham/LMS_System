@@ -57,7 +57,6 @@ public class UserService {
 			tempUser = new User();
 			System.out.println("---> User doesn't exist...");
 			tempUser.setEmailError(true);
-			;
 		}
 		return tempUser;
 	}

@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Lob;
 
 import com.spring.lms.model.Chapters;
+import com.spring.lms.model.UserReviews;
+import com.spring.lms.service.UserReviewsService;
 
 public class CoursesDTO {
 	// c.course_id, c.course_name, c.course_duration, c.course_rating,
@@ -32,18 +34,21 @@ public class CoursesDTO {
 
 	private String courseStatus;
 
+	private int userId;
+
 	private String tutorName;
 
 	private byte[] tutorImage;
 
 	private List<Chapters> chapters;
+	
+	private List<UserReviews> reviews;
 
-	public CoursesDTO() {
-	}
+	public CoursesDTO() {}
 
 	public CoursesDTO(int courseId, String courseName, String courseDescription, int coursePrice, int courseDuration,
-			Date courseDate, byte[] courseImage, int courseRating, String courseStatus, String fName, String lName,
-			byte[] tutorImage) {
+			Date courseDate, byte[] courseImage, int courseRating, String courseStatus, int userId, String fName,
+			String lName, byte[] tutorImage) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
@@ -54,10 +59,27 @@ public class CoursesDTO {
 		this.courseImage = courseImage;
 		this.courseRating = courseRating;
 		this.courseStatus = courseStatus;
+		this.userId = userId;
 		this.tutorName = fName + ' ' + lName;
 		this.tutorImage = tutorImage;
 	}
-	
+
+	public List<UserReviews> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<UserReviews> reviews) {
+		this.reviews = reviews;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public List<Chapters> getChapters() {
 		return chapters;
 	}
@@ -153,5 +175,4 @@ public class CoursesDTO {
 	public void setCourseDescription(String courseDescription) {
 		this.courseDescription = courseDescription;
 	}
-
 }
