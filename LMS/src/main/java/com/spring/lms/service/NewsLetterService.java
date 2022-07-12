@@ -29,6 +29,8 @@ public class NewsLetterService {
         Optional<NewsLetter> optionalNewsLetter
                 = newsLetterRepository.findByEmail(email);
 
+        logger.info("---> User exists in NewsLetter : {} ", optionalNewsLetter);
+
         return optionalNewsLetter.isPresent();
     }
 

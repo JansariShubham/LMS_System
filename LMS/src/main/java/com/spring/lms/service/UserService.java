@@ -29,13 +29,19 @@ public class UserService {
 	@Autowired
 	private EmailUtility emailUtility;
 
+	@Autowired
+	private NewsLetterService newsLetterService;
+
 	public User signUp(User user) {
 
 		if (repo.findByEmailId(user.getEmailId()) != null) {
 			System.out.println("User is all ready exist!!");
 			return null;
 		}
-
+		// NewsLetter Email removal if exists
+		if( newsLetterService.checkUserExistsInNewsLetter( user.getEmailId().trim() ) ){
+			newsLetterService.removeUserFromNewsLetter( user.getEmailId().trim() );
+		}
 		return repo.save(user);
 	}
 
