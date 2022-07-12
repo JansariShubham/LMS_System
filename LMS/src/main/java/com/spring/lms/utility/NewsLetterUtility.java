@@ -25,13 +25,27 @@ public class NewsLetterUtility {
     @Autowired
     private UserService userService;
 
-    public void sendNewsLetterUpdateEmail(){
-        List<String> list_of_receiver_email = new LinkedList<>();
-        List<String> list_of_user_email = userService.listAllUserEmailFromUser();
-        List<String> list_of_news_letter_email = newsLetterService.listAllEmailAddressFromNewsLetter();
+    @Autowired
+    private EmailUtility emailUtility;
 
-        list_of_news_letter_email.addAll(list_of_user_email);
-        list_of_receiver_email.addAll(list_of_news_letter_email);
+    public void sendNewsLetterUpdateEmail(String emailSubject, String emailBody){
+        List<String> list_of_receiver_email = new LinkedList<>();
+
+        try {
+            List<String> list_of_user_email = userService.listAllUserEmailFromUser();
+            List<String> list_of_news_letter_email = newsLetterService.listAllEmailAddressFromNewsLetter();
+
+            list_of_news_letter_email.addAll(list_of_user_email);
+            list_of_receiver_email.addAll(list_of_news_letter_email);
+
+            emailUtility.sendHTMLEmailToNewsLetterSubscriber(
+                    list_of_receiver_email, emailSubject, emailBody
+            );
+        }
+        catch(Exception e){
+            System.out.println("\n\nError during News Letter Email: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

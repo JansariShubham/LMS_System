@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 
 @Service
 public class EmailUtilityImpl implements EmailUtility
@@ -56,5 +57,25 @@ public class EmailUtilityImpl implements EmailUtility
         }
 
         return false;
+    }
+
+    @Override
+    public void sendHTMLEmailToNewsLetterSubscriber(List<String> listOfEmail, String emailSubject, String emailBody) {
+
+        try{
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setBcc(
+                    listOfEmail.stream().toArray(String[]::new) //Converted List<String> to String[]
+            );
+            mimeMessageHelper.setSubject(emailSubject);
+            mimeMessageHelper.setText(emailBody, true);
+            javaMailSender.send(mimeMessage);
+        }catch(Exception e){
+            System.out.println("\n\nError during sending news letter email in IMPL: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+
     }
 }
