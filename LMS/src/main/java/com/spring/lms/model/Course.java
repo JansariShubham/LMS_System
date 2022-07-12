@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -53,6 +54,9 @@ public class Course implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private List<Chapters> chapters;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<User> user;
 
 	public int getCourseId() {
 		return courseId;
@@ -140,6 +144,14 @@ public class Course implements Serializable {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public List<User> getUser() {
+		return user;
+	}
+
+	public void setUser(List<User> user) {
+		this.user = user;
 	}
 
 }

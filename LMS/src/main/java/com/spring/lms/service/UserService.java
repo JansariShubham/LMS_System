@@ -106,7 +106,6 @@ public class UserService {
 			// existingUser.setImage(file.getBytes());\
 			System.out.println(existingUser.getRole());
 			if (existingUser.getRole().equals("student")) {
-				System.out.println("hello");
 
 				existingUser.setRole("tutor");
 				tutor.setUser(existingUser);
@@ -117,8 +116,8 @@ public class UserService {
 			}
 
 			tutor.setUser(existingUser);
-			 repo.save(existingUser);
-			 return null;
+			repo.save(existingUser);
+			return null;
 		} else {
 			System.out.println("hello ,,,");
 			// user.setImage(file.getBytes());
