@@ -20,4 +20,9 @@ public interface RegistartionRepo extends JpaRepository<User, Integer> {
 			"SELECT u.emailId FROM User as u WHERE u.role = 'user'"
 	)
 	List<String> getAllEmailAddressFromUserData();
+
+	@Query(
+			"SELECT u.firstName, u.lastName FROM User as u WHERE u.user_id = ?1"
+	)
+	List<List<String>> getUserNameUsingId(int id);
 }

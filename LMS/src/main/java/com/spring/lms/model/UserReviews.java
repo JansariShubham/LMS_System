@@ -25,6 +25,9 @@ public class UserReviews implements Serializable
     @Column(name = "courseReview", nullable = true)
     private String reviewDescription;
 
+    @Transient
+    private String userName;
+
     public UserReviews() {
     }
 
@@ -74,5 +77,13 @@ public class UserReviews implements Serializable
 
     public void setReviewDate(Date reviewDate) {
         this.reviewDate = reviewDate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
