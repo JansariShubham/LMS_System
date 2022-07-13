@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 
 @Service
@@ -25,9 +26,18 @@ public class UserReviewsService{
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private UserService userService;
+
     public UserReviews saveUserReview(UserReviews userReview) {
         userReview.setReviewDate(new Date());
         logger.info(">>> Saving User Review in database");
+        Optional<String> getFullName = Optional.ofNullable(userService.getFullNameOfUser(userReview.getUserId()));
+
+        if(getFullName.isPresent()) {
+            userReview.setUserName(getFullName.get());
+        }
+        
         userReviewsRepo.save(userReview);
         Optional<Course> upCourse = updateCourseRating(userReview.getCourseId());
         return upCourse.isPresent() ? userReview : null;
