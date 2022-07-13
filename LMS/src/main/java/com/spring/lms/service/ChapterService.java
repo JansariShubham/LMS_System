@@ -53,7 +53,7 @@ public class ChapterService {
 	public String deleteChapter(int chapterId) {
 		// TODO Auto-generated method stub
 		chapRepo.deleteById(chapterId);
-		return "Chapter Deleted!! " + chapterId;
+		return null;
 	}
 
 	public List<Chapters> getChaptersList(int courseId) {
