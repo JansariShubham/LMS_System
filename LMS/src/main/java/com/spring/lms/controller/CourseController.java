@@ -51,6 +51,7 @@ public class CourseController {
 
 	@PutMapping("/course")
 	public Course updateCourse(@RequestBody Course course) {
+		
 		return courseService.updateCourse(course);
 	}
 

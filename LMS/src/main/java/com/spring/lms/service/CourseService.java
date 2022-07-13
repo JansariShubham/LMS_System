@@ -66,9 +66,17 @@ public class CourseService {
 
 	public Course updateCourse(Course course) {
 		// TODO Auto-generated method stub
+		
+		int userId = course.getUserId();
+		int tutorId = tutorRepo.findTutorByUserId(userId);
+		Tutor tutor = tutorRepo.findById(tutorId).orElse(null);
 		Course existingCourse = courseRepo.findById(course.getCourseId()).orElse(null);
 		existingCourse.setCourseName(course.getCourseName());
 		existingCourse.setCourseDescription(course.getCourseDescription());
+		existingCourse.setCoursePrice(course.getCoursePrice());
+		existingCourse.setCourseDuration(course.getCourseDuration());
+		existingCourse.setCourseDate(course.getCourseDate());
+		existingCourse.setTutor(tutor);
 		return courseRepo.save(existingCourse);
 	}
 
