@@ -112,4 +112,8 @@ public class CourseService {
 	}
 
 
+    public void updateCourseRating(int courseRating, int courseId) {
+
+		courseRepo.updateCourseRatingById(courseRating, courseId);
+	}
 }

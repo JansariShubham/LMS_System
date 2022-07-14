@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +39,18 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 	Method to get all user email address
 	 */
 
+	/**
+	 Method to update Course Rating
+	 */
 
+	@Modifying
+	@Transactional
+	@Query(
+			nativeQuery = true,
+			value = "UPDATE course as c " +
+					"SET c.course_rating = ?1 " +
+					"WHERE c.course_id = ?2"
+	)
+	void updateCourseRatingById(int courseRating, int courseId);
 
 }

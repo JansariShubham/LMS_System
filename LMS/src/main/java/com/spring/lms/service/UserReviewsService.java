@@ -61,7 +61,8 @@ public class UserReviewsService{
         logger.info(">>> Course Rating: {}", updateRating);
 
         logger.info(">> UPDATING COURSE RATING ");
-        courseService.updateCourse(getCourse.get());
+//        courseService.updateCourse(getCourse.get());
+        courseService.updateCourseRating(getCourse.get().getCourseRating(), getCourse.get().getCourseId());
         return getCourse;
     }
 
