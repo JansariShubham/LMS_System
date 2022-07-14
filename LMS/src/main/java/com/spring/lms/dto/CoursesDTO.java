@@ -42,7 +42,7 @@ public class CoursesDTO {
 
 	private List<Chapters> chapters;
 	
-	private List<UserReviews> reviews;
+	private List<UserReviews> courseReviews;
 
 	public CoursesDTO() {}
 
@@ -64,12 +64,12 @@ public class CoursesDTO {
 		this.tutorImage = tutorImage;
 	}
 
-	public List<UserReviews> getReviews() {
-		return reviews;
+	public List<UserReviews> getCourseReviews() {
+		return courseReviews;
 	}
 
-	public void setReviews(List<UserReviews> reviews) {
-		this.reviews = reviews;
+	public void setCourseReviews(List<UserReviews> reviews) {
+		this.courseReviews = reviews;
 	}
 
 	public int getUserId() {

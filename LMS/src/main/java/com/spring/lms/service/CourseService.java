@@ -45,7 +45,7 @@ public class CourseService {
 		List<CoursesDTO> list = courseRepo.getCourses();
 		list.stream().map(l -> {
 			l.setChapters(chapterService.getChaptersList(l.getCourseId()));
-			l.setReviews(userReviewsService.loadAllUserReviewForCourse(l.getCourseId()));
+			l.setCourseReviews(userReviewsService.loadAllUserReviewForCourse(l.getCourseId()));
 			return l;
 		}).collect(Collectors.toList());
 		return list;
@@ -55,7 +55,7 @@ public class CourseService {
 		// TODO Auto-generated method stub
 		CoursesDTO course = courseRepo.getCourse(courseId);
 		course.setChapters(chapterService.getChaptersList(course.getCourseId()));
-		course.setReviews(userReviewsService.loadAllUserReviewForCourse(course.getCourseId()));
+		course.setCourseReviews(userReviewsService.loadAllUserReviewForCourse(course.getCourseId()));
 		return course;
 	}
 
