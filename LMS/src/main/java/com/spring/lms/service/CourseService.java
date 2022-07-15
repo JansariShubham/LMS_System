@@ -56,7 +56,7 @@ public class CourseService {
 
 		String link = this.hostAddress + "homepage/courses/" + courseId;
 		String emailBody
-				= 	"<div style = 'background-color:gray'>" +
+				= 	"<div style = 'background-color:rgb(229 231 235)'>" +
 					"<h2 style = 'border:2px solid black; font-size: 2rem; padding: 0.5rem; font-weight:bold'>" +
 					courseName.toUpperCase() + " BY " + tutor.getUser().getFirstName().toUpperCase() +
 					"</h2>" +
