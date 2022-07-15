@@ -12,25 +12,23 @@ import javax.persistence.Lob;
 
 @Entity
 public class Blog implements Serializable {
-	
+
 	@Id
-	@GeneratedValue(strategy =GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int blogId;
-	
+
 	@Column(nullable = false)
 	private String blogTitle;
-	
+
 	@Column(nullable = false)
 	private String blogBody;
-	
+
 	@Column(nullable = false)
 	private Date blogDate;
-	
+
 	@Lob
 	@Column(length = Integer.MAX_VALUE)
 	private byte[] blogImage;
-	
-	
 
 	public byte[] getBlogImage() {
 		return blogImage;
@@ -48,7 +46,6 @@ public class Blog implements Serializable {
 		this.blogId = blogId;
 	}
 
-	
 	public String getBlogTitle() {
 		return blogTitle;
 	}
@@ -72,6 +69,5 @@ public class Blog implements Serializable {
 	public void setBlogDate(Date blogDate) {
 		this.blogDate = blogDate;
 	}
-	
 
 }
