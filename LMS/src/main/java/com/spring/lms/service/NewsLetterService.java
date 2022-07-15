@@ -18,11 +18,21 @@ public class NewsLetterService {
 
     private Logger logger = LoggerFactory.getLogger(NewsLetterService.class);
 
-    public NewsLetter addEmailToNewsLetterList(String email) {
+    public boolean addEmailToNewsLetterList(String email) {
         logger.info("--- Service = Adding Email ID TO News Letter List: {}", email);
-        return newsLetterRepository.save(
+
+        Optional<NewsLetter> newsLetter = isNewsLetterEmailExists(email);
+
+        if(newsLetter.isPresent()) return true;
+
+        newsLetterRepository.save(
                 new NewsLetter(email)
         );
+        return true;
+    }
+
+    private Optional<NewsLetter> isNewsLetterEmailExists(String email) {
+        return newsLetterRepository.findByEmail(email);
     }
 
     public boolean checkUserExistsInNewsLetter(String email) {

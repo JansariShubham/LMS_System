@@ -29,12 +29,7 @@ public class NewsLetterController {
 
         if( ! isUserExistsWithEmailID(email) )
         {
-            Optional<NewsLetter> newsLetterOptional =
-                    Optional.ofNullable(newsLetterService.addEmailToNewsLetterList(email));
-
-            logger.info(">>> Data inside NewsLetterOptional: {}", newsLetterOptional);
-
-            return newsLetterOptional.isPresent();
+            return newsLetterService.addEmailToNewsLetterList(email);
         }
 
         return false;
