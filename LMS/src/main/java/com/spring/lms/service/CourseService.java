@@ -1,18 +1,19 @@
 package com.spring.lms.service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.spring.lms.dto.CoursesDTO;
 import com.spring.lms.model.Course;
 import com.spring.lms.model.Tutor;
 import com.spring.lms.repository.CourseRepo;
 import com.spring.lms.repository.TutorRepo;
+import com.spring.lms.utility.NewsLetterUtility;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
@@ -29,6 +30,12 @@ public class CourseService {
 	@Autowired
 	private TutorRepo tutorRepo;
 
+	@Autowired
+	private NewsLetterUtility newsLetterUtility;
+
+	@Value("${app.host.port}")
+	private String hostAddress;
+
 	public Course saveCourse(Course course) {
 		// Tutor t = course.getTutor();
 		// course.setTutor(t);
@@ -37,7 +44,32 @@ public class CourseService {
 		Tutor tutor = tutorRepo.findById(tutorId).orElse(null);
 		course.setTutor(tutor);
 		System.out.println("save course!");
+
+		sendNewsLetterUpdate(course.getCourseId(), course.getTutor(), course.getCourseName(), course.getCoursePrice());
+
 		return courseRepo.save(course);
+	}
+
+	private void sendNewsLetterUpdate(int courseId, Tutor tutor, String courseName, int coursePrice) {
+
+		String emailSubject = tutor.getUser().getFirstName() + " Added " + courseName  + " !!";
+
+		String link = this.hostAddress + "homepage/courses/" + courseId;
+		String emailBody
+				= 	"<div style = 'background-color:gray'>" +
+					"<h2 style = 'border:2px solid black; font-size: 2rem; padding: 0.5rem; font-weight:bold'>" +
+					courseName.toUpperCase() + " BY " + tutor.getUser().getFirstName().toUpperCase() +
+					"</h2>" +
+						"<div style = 'font-size: 1rem;'>" +
+							"<p>Checkout this course </p>" +
+							"<a href ="+ link + ">" + courseName + "</a>" +
+							"<br><br>" +
+							"<span style = 'font-weight:bold;'>Course Will Start Soon. Click Above Link For More Details.</span>" +
+							"<span style = 'font-weight:bold;'>Course Price:" + coursePrice + " Rs.</span>" +
+							"<p style='font-style:italic; font-weight:bold'>Happy Learning, <br> CourseLog.</p>" +
+						"</div>" +
+					"</div>";
+		newsLetterUtility.sendNewsLetterUpdateEmail(emailSubject, emailBody);
 	}
 
 	public List<CoursesDTO> getCourses() {
