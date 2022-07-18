@@ -47,15 +47,16 @@ public class EnrollmentService {
 
 	public String updateOrder(Map<String, Object> data) {
 		// TODO Auto-generated method stub
-		Enrollment enrollment = enrollmentRepo.findByorderId(data.get("order_id").toString());
+		Enrollment enrollment = new Enrollment();
+//		Enrollment enrollment = enrollmentRepo.findByorderId(data.get("order_id").toString());
 
-		enrollment.setOrderId(data.get("id").toString());
-		enrollment.setStatus(data.get("status").toString());
+		enrollment.setOrderId(data.get("order_id").toString());
+//		enrollment.setStatus(data.get("status").toString());
 		enrollment.setDate(LocalDateTime.now());
 		enrollment.setCourseId((int) data.get("courseId"));
 		enrollment.setUserId((int) data.get("userId"));
 		
-		enrollment.setPaymentId(data.get("payment_Id").toString());
+		enrollment.setPaymentId(data.get("payment_id").toString());
 
 		enrollmentRepo.save(enrollment);
 		return null;
