@@ -27,21 +27,38 @@ public class EnrollmentService {
 
 		RazorpayClient client = new RazorpayClient("rzp_test_0OYWVJUOQXo91j", "M0m7pZu7OhumX9UhFwsStgC7");
 		JSONObject obj = new JSONObject();
-		obj.put("amount", amount*100);
+		obj.put("amount", amount * 100);
 		obj.put("currency", "INR");
 
 		Order order = client.Orders.create(obj);
-		Enrollment enrollment = new Enrollment();
-		
-		enrollment.setOrderId(order.get("id"));
-		enrollment.setStatus(order.get("status"));
-		enrollment.setDate(LocalDateTime.now());
-		
-		enrollmentRepo.save(enrollment);
+//		Enrollment enrollment = new Enrollment();
+//
+//		enrollment.setOrderId(order.get("id"));
+//		enrollment.setStatus(order.get("status"));
+//		enrollment.setDate(LocalDateTime.now());
+
+//		enrollmentRepo.save(enrollment);
 
 		System.out.println(order);
 
 		return order.toString();
+
+	}
+
+	public String updateOrder(Map<String, Object> data) {
+		// TODO Auto-generated method stub
+		Enrollment enrollment = enrollmentRepo.findByorderId(data.get("order_id").toString());
+
+		enrollment.setOrderId(data.get("id").toString());
+		enrollment.setStatus(data.get("status").toString());
+		enrollment.setDate(LocalDateTime.now());
+		enrollment.setCourseId((int) data.get("courseId"));
+		enrollment.setUserId((int) data.get("userId"));
+		
+		enrollment.setPaymentId(data.get("payment_Id").toString());
+
+		enrollmentRepo.save(enrollment);
+		return null;
 
 	}
 

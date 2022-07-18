@@ -27,5 +27,11 @@ public class EnrollController {
 		return enrollmentService.createOrder(data);
 
 	}
+	
+	@PostMapping("/enroll-course")
+	public String updateOrder(@RequestBody Map<String, Object> data)
+	{
+		return enrollmentService.updateOrder(data);
+	}
 
 }

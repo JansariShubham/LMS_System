@@ -8,4 +8,6 @@ import com.spring.lms.model.Enrollment;
 @Repository
 public interface EnrollmentRepo extends JpaRepository<Enrollment, Integer> {
 
+	Enrollment findByorderId(String orderId);
+
 }
