@@ -78,6 +78,6 @@ public class EmailUtilityImpl implements EmailUtility
             System.out.println("\n\nError during sending news letter email in IMPL: " + e.getMessage());
             e.printStackTrace();
         }
-        
+
     }
 }
