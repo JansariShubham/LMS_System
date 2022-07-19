@@ -35,6 +35,7 @@ public class UserReviewsService{
         Optional<String> getFullName = Optional.ofNullable(userService.getFullNameOfUser(userReview.getUserId()));
 
         if(getFullName.isPresent()) {
+            System.out.println( "Full UserName: " + getFullName.get() );
             userReview.setUserName(getFullName.get());
         }
         

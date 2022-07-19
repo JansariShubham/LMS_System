@@ -207,7 +207,7 @@ public class UserService {
 	public String getFullNameOfUser(int userId){
 
 		List<List<String>> firstAndLastName = repo.getUserNameUsingId(userId);
-		if(firstAndLastName.size() == 0){
+		if(firstAndLastName.size() != 0){
 			String firstName = firstAndLastName.get(0).get(0);
 			String lastName = firstAndLastName.get(0).get(1);
 			return (firstName + " " + lastName);
