@@ -65,7 +65,10 @@ public class EmailUtilityImpl implements EmailUtility
         try{
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-            mimeMessageHelper.setBcc(
+            /*mimeMessageHelper.setBcc(
+                    listOfEmail.stream().toArray(String[]::new) //Converted List<String> to String[]
+            );*/
+            mimeMessageHelper.setTo(
                     listOfEmail.stream().toArray(String[]::new) //Converted List<String> to String[]
             );
             mimeMessageHelper.setSubject(emailSubject);
@@ -75,7 +78,6 @@ public class EmailUtilityImpl implements EmailUtility
             System.out.println("\n\nError during sending news letter email in IMPL: " + e.getMessage());
             e.printStackTrace();
         }
-
-
+        
     }
 }
