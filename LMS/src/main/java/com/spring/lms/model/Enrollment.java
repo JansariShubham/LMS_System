@@ -20,8 +20,6 @@ public class Enrollment {
 
 	private int userId;
 
-	private String status;
-
 	private LocalDateTime date;
 
 	private String paymentId;
@@ -56,14 +54,6 @@ public class Enrollment {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public LocalDateTime getDate() {
