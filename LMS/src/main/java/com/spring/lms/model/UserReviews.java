@@ -25,7 +25,6 @@ public class UserReviews implements Serializable
     @Column(name = "courseReview", nullable = true)
     private String reviewDescription;
 
-    @Transient
     private String userName;
 
     public UserReviews() {
