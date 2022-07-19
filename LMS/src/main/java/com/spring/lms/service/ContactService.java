@@ -48,16 +48,13 @@ public class ContactService {
 				+ "<br><span>Thank you for Contact Us.</span>" + "</div>";
 		String emailSubject = "Reply from CourseLog";
 
-	
-		while(emailUtility.sendHTMLEmail(emailTo, emailSubject, emailBody))
+		boolean result = emailUtility.sendHTMLEmail(emailTo, emailSubject, emailBody);
+		if(result)
 		{
-			System.out.println("in while loop ....");
 			contact.setStatus(1);
-			System.out.println(contact.getStatus());
 			contactRepo.save(contact);
-			break;
 		}
-		return emailUtility.sendHTMLEmail(emailTo, emailSubject, emailBody);
+		return result;
 
 	}
 
