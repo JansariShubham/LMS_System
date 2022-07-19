@@ -48,7 +48,7 @@ public class BlogService {
 		// TODO Auto-generated method stub
 		blogRepo.deleteById(blogId);
 		
-		return "Blog Deleted" + blogId;
+		return null;
 	}
 
 	public boolean saveblogImage(int blogId, MultipartFile blogImage) {
