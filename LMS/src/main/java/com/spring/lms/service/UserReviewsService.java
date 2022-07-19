@@ -6,6 +6,7 @@ import com.spring.lms.repository.UserReviewsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -72,6 +73,7 @@ public class UserReviewsService{
         return userReviewsRepo.findByCourseId(courseId);
     }
     @Transactional
+    @Modifying
     public boolean removeUserReviewFromCourse(Integer reviewId) {
         logger.info(">>> REmoving review from database");
         Optional<UserReviews> userReview = userReviewsRepo.findById(reviewId);
