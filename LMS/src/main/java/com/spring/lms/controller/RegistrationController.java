@@ -20,8 +20,7 @@ public class RegistrationController {
 	
 	@PostMapping("/register/sendotp")
 	public String sendOTP(@RequestBody Map<String,String> data) {
-		this.userService.sendOTP(data);
-		return null;
+		return this.userService.sendOTP(data);
 	}
 	
 	@PostMapping("/register")

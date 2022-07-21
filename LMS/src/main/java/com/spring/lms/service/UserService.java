@@ -226,7 +226,10 @@ public class UserService {
 	public String sendOTP(Map<String, String> data) {
 		
 		String otp = this.genrateOTP.generateOTP(6);
-		
+		String emailTo = data.get("emailId");
+		String emailSubject = "Registration OTP from Itaims";
+		String emailBody = "Registration OTP is : " + otp;
+		this.emailUtility.sendTextEmail(emailTo, emailSubject, emailBody);
 		return otp;
 	}
 }
