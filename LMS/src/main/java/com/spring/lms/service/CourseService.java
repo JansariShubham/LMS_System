@@ -146,5 +146,9 @@ public class CourseService {
 	public void updateCourseRating(double courseRating, int courseId) {
 		courseRepo.updateCourseRatingById(courseRating, courseId);
 	}
+	
+//	public Optional<int[]> getMyCourses(int id){
+//		
+//	}
 
 }

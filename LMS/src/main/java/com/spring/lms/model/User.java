@@ -40,20 +40,17 @@ public class User {
 	@Column(name = "profile_image", length = Integer.MAX_VALUE)
 	byte[] profileImage;
 
-	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "user")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	private Tutor tutor;
 
-//	@ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
-//	private List<Course> course;
-	
 	@Transient
-	private int[] myCourses;
+	private List<Integer> myCourses;
 	
-	public int[] getMyCourses() {
+	public List<Integer> getMyCourses() {
 		return myCourses;
 	}
 
-	public void setMyCourses(int[] myCourses) {
+	public void setMyCourses(List<Integer> myCourses) {
 		this.myCourses = myCourses;
 	}
 
@@ -136,13 +133,4 @@ public class User {
 	public void setProfileImage(byte[] profileImage) {
 		this.profileImage = profileImage;
 	}
-
-//	public List<Course> getCourse() {
-//		return course;
-//	}
-//
-//	public void setCourse(List<Course> course) {
-//		this.course = course;
-//	}
-
 }

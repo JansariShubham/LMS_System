@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.lms.model.Tutor;
 import com.spring.lms.model.User;
+import com.spring.lms.repository.EnrollmentRepo;
 import com.spring.lms.repository.RegistartionRepo;
 import com.spring.lms.repository.TutorRepo;
 import com.spring.lms.utility.EmailUtility;
@@ -40,6 +41,10 @@ public class UserService {
 	
 	@Autowired
 	private GenerateOTP genrateOTP;
+	
+	@Autowired
+	private EnrollmentService enrollmentService;
+	
 	public User signUp(User user) {
 
 		if (repo.findByEmailId(user.getEmailId()) != null) {
@@ -60,6 +65,16 @@ public class UserService {
 			if (!Arrays.equals(tempUser.getPassword(), user.getPassword())) {
 				System.out.println("---> Invalid password...");
 				tempUser.setPasswordError(true);
+			}
+			else {
+				if(tempUser.getRole().equalsIgnoreCase("student")) {
+					Optional<List<Integer>> list = this.enrollmentService.getMyCourses(tempUser.getUser_id());					
+					if(list.isPresent())
+						tempUser.setMyCourses(list.get());
+				}
+				else if(tempUser.getRole().equalsIgnoreCase("tutor")){
+					
+				}
 			}
 		} else {
 			tempUser = new User();

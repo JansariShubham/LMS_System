@@ -1,7 +1,9 @@
 package com.spring.lms.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -31,14 +33,6 @@ public class EnrollmentService {
 		obj.put("currency", "INR");
 
 		Order order = client.Orders.create(obj);
-//		Enrollment enrollment = new Enrollment();
-//
-//		enrollment.setOrderId(order.get("id"));
-//		enrollment.setStatus(order.get("status"));
-//		enrollment.setDate(LocalDateTime.now());
-
-//		enrollmentRepo.save(enrollment);
-
 		System.out.println(order);
 
 		return order.toString();
@@ -48,19 +42,16 @@ public class EnrollmentService {
 	public String updateOrder(Map<String, Object> data) {
 		// TODO Auto-generated method stub
 		Enrollment enrollment = new Enrollment();
-//		Enrollment enrollment = enrollmentRepo.findByorderId(data.get("order_id").toString());
-
 		enrollment.setOrderId(data.get("order_id").toString());
-//		enrollment.setStatus(data.get("status").toString());
 		enrollment.setDate(LocalDateTime.now());
 		enrollment.setCourseId((int) data.get("courseId"));
 		enrollment.setUserId((int) data.get("userId"));
-
 		enrollment.setPaymentId(data.get("payment_id").toString());
 
 		enrollmentRepo.save(enrollment);
 		return null;
-
 	}
-
+	public Optional<List<Integer>> getMyCourses(int id) {
+		return enrollmentRepo.getMyCourses(id);
+	}
 }
