@@ -33,6 +33,7 @@ public class Course implements Serializable {
 
 	private int coursePrice;
 
+	@Column(length = 2)
 	private byte courseDuration;
 
 	private Date courseDate;
@@ -41,6 +42,7 @@ public class Course implements Serializable {
 	@Column(length = Integer.MAX_VALUE)
 	private byte[] courseImage;
 
+	@Column(length = 1)
 	private double courseRating;
 
 	@Column(length = 10)
