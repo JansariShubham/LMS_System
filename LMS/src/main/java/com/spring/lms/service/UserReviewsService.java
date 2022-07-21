@@ -1,90 +1,94 @@
 package com.spring.lms.service;
 
-import com.spring.lms.model.Course;
-import com.spring.lms.model.UserReviews;
-import com.spring.lms.repository.UserReviewsRepo;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
-import javax.swing.text.html.Option;
-import javax.transaction.Transactional;
+import com.spring.lms.model.Course;
+import com.spring.lms.model.UserReviews;
+import com.spring.lms.repository.UserReviewsRepo;
 
 @Service
-public class UserReviewsService{
+@Transactional
+public class UserReviewsService {
 
-    private Logger logger = LoggerFactory.getLogger(UserReviewsService.class);
+	private Logger logger = LoggerFactory.getLogger(UserReviewsService.class);
 
-    @Autowired
-    private UserReviewsRepo userReviewsRepo;
+	@Autowired
+	private UserReviewsRepo userReviewsRepo;
 
-    @Autowired
-    private CourseService courseService;
+	@Autowired
+	private CourseService courseService;
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    public UserReviews saveUserReview(UserReviews userReview) {
-        userReview.setReviewDate(new Date());
-        logger.info(">>> Saving User Review in database");
-        Optional<String> getFullName = Optional.ofNullable(userService.getFullNameOfUser(userReview.getUserId()));
+	public UserReviews saveUserReview(UserReviews userReview) {
+		userReview.setReviewDate(new Date());
+		logger.info(">>> Saving User Review in database");
+		Optional<String> getFullName = Optional.ofNullable(userService.getFullNameOfUser(userReview.getUserId()));
 
-        if(getFullName.isPresent()) {
-            System.out.println( "Full UserName: " + getFullName.get() );
-            userReview.setUserName(getFullName.get());
-        }
-        
-        userReviewsRepo.save(userReview);
-        Optional<Course> upCourse = updateCourseRating(userReview.getCourseId());
-        return upCourse.isPresent() ? userReview : null;
-    }
+		if (getFullName.isPresent()) {
+			System.out.println("Full UserName: " + getFullName.get());
+			userReview.setUserName(getFullName.get());
+		}
 
-    public Optional<Course> updateCourseRating(int courseId){
+		userReviewsRepo.save(userReview);
+		Optional<Course> upCourse = updateCourseRating(userReview.getCourseId());
+		return upCourse.isPresent() ? userReview : null;
+	}
 
-        List<List<Integer>> getTotalRatingWithUser = userReviewsRepo.countTotalByCourseId(courseId);
+	public Optional<Course> updateCourseRating(int courseId) {
 
-        if(getTotalRatingWithUser == null) return Optional.empty();
-        if(getTotalRatingWithUser.size() == 0) return Optional.empty();
-        if(getTotalRatingWithUser.get(0).get(0) == null
-            || getTotalRatingWithUser.get(0).get(1) == null
-                ) return Optional.empty();
+		List<List<Integer>> getTotalRatingWithUser = userReviewsRepo.countTotalByCourseId(courseId);
 
-        int totalRating = getTotalRatingWithUser.get(0).get(0);
-        int totalUser = getTotalRatingWithUser.get(0).get(1);
+		if (getTotalRatingWithUser == null)
+			return Optional.empty();
+		if (getTotalRatingWithUser.size() == 0)
+			return Optional.empty();
+		if (getTotalRatingWithUser.get(0).get(0) == null || getTotalRatingWithUser.get(0).get(1) == null)
+			return Optional.empty();
 
-        logger.info(">>> Total Rating , User {} , {}", totalRating, totalUser);
-        Optional<Course> getCourse = courseService.getCourseDetailsById(courseId);
-        int updateRating = Math.round(totalRating / totalUser);
+		int totalRating = getTotalRatingWithUser.get(0).get(0);
+		int totalUser = getTotalRatingWithUser.get(0).get(1);
 
-        getCourse.get().setCourseRating(updateRating);
-        logger.info(">>> Course Rating: {}", updateRating);
+		logger.info(">>> Total Rating , User {} , {}", totalRating, totalUser);
+		Optional<Course> getCourse = courseService.getCourseDetailsById(courseId);
+		double result = totalRating / totalUser;
+		double updateRating = Double.parseDouble(String.format("%.2f", result));
 
-        logger.info(">> UPDATING COURSE RATING ");
+		getCourse.get().setCourseRating(updateRating);
+		logger.info(">>> Course Rating: {}", updateRating);
+
+		logger.info(">> UPDATING COURSE RATING ");
 //        courseService.updateCourse(getCourse.get());
-        courseService.updateCourseRating(getCourse.get().getCourseRating(), getCourse.get().getCourseId());
-        return getCourse;
-    }
+		courseService.updateCourseRating(getCourse.get().getCourseRating(), getCourse.get().getCourseId());
+		return getCourse;
+	}
 
-    public List<UserReviews> loadAllUserReviewForCourse(Integer courseId) {
-        logger.info(">>> Fetching all user review from database");
-        return userReviewsRepo.findByCourseId(courseId);
-    }
-    @Transactional
-    @Modifying
-    public boolean removeUserReviewFromCourse(Integer reviewId) {
-        logger.info(">>> REmoving review from database");
-        Optional<UserReviews> userReview = userReviewsRepo.findById(reviewId);
-        int courseId = userReview.get().getCourseId();
-        System.out.println(userReview);
-        userReviewsRepo.deleteByReviewId(reviewId);
-        System.out.println("\n\n >>> REview ID removed");
-        Optional<Course> upCourse = updateCourseRating(courseId);
-        return true;
-    }
+	public List<UserReviews> loadAllUserReviewForCourse(Integer courseId) {
+		logger.info(">>> Fetching all user review from database");
+		return userReviewsRepo.findByCourseId(courseId);
+	}
+
+	@Transactional
+	@Modifying
+	public boolean removeUserReviewFromCourse(Integer reviewId) {
+		logger.info(">>> REmoving review from database");
+		Optional<UserReviews> userReview = userReviewsRepo.findById(reviewId);
+		int courseId = userReview.get().getCourseId();
+		System.out.println(userReview);
+		userReviewsRepo.deleteByReviewId(reviewId);
+		System.out.println("\n\n >>> REview ID removed");
+		Optional<Course> upCourse = updateCourseRating(courseId);
+		return true;
+	}
 }

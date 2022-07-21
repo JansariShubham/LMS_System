@@ -24,7 +24,7 @@ public class Chapters implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int chapterId;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 30)
 	private String chapterName;
 
 	@Column(nullable = false)

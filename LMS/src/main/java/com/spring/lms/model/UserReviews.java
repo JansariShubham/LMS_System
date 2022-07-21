@@ -22,9 +22,10 @@ public class UserReviews implements Serializable
 
     private Date reviewDate;
 
-    @Column(name = "courseReview", nullable = true)
+    @Column(name = "courseReview", nullable = false, length = 300)
     private String reviewDescription;
 
+    @Column(length = 40)
     private String userName;
 
     public UserReviews() {

@@ -24,13 +24,13 @@ public class CoursesDTO {
 
 	private int coursePrice;
 
-	private int courseDuration;
+	private byte courseDuration;
 
 	private Date courseDate;
 
 	private byte[] courseImage;
 
-	private int courseRating;
+	private double courseRating;
 
 	private String courseStatus;
 
@@ -46,8 +46,8 @@ public class CoursesDTO {
 
 	public CoursesDTO() {}
 
-	public CoursesDTO(int courseId, String courseName, String courseDescription, int coursePrice, int courseDuration,
-			Date courseDate, byte[] courseImage, int courseRating, String courseStatus, int userId, String fName,
+	public CoursesDTO(int courseId, String courseName, String courseDescription, int coursePrice, byte courseDuration,
+			Date courseDate, byte[] courseImage, double courseRating, String courseStatus, int userId, String fName,
 			String lName, byte[] tutorImage) {
 		super();
 		this.courseId = courseId;
@@ -112,11 +112,11 @@ public class CoursesDTO {
 		this.coursePrice = coursePrice;
 	}
 
-	public int getCourseDuration() {
+	public byte getCourseDuration() {
 		return courseDuration;
 	}
 
-	public void setCourseDuration(int courseDuration) {
+	public void setCourseDuration(byte courseDuration) {
 		this.courseDuration = courseDuration;
 	}
 
@@ -136,11 +136,11 @@ public class CoursesDTO {
 		this.courseImage = courseImage;
 	}
 
-	public int getCourseRating() {
+	public double getCourseRating() {
 		return courseRating;
 	}
 
-	public void setCourseRating(int courseRating) {
+	public void setCourseRating(double courseRating) {
 		this.courseRating = courseRating;
 	}
 

@@ -11,10 +11,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int user_id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 20)
 	private String firstName;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 20)
 	private String lastName;
 
 	@Column(unique = true, nullable = false)
@@ -23,17 +23,18 @@ public class User {
 	@Column(nullable = false)
 	private char[] password;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 10)
 	private String role;
 
-	@Column(nullable = true)
+	@Column(nullable = true, length = 10)
 	private String phoneNum;
-
+		
 	@Transient
 	private boolean emailError;
-
 	@Transient
 	private boolean passwordError;
+	@Transient
+	private boolean userError;
 
 	@Lob
 	@Column(name = "profile_image", length = Integer.MAX_VALUE)

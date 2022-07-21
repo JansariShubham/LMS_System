@@ -2,6 +2,8 @@ package com.spring.lms.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.spring.lms.repository.ContactRepo;
 import com.spring.lms.utility.EmailUtility;
 
 @Service
+@Transactional
 public class ContactService {
 
 	@Autowired
@@ -49,8 +52,7 @@ public class ContactService {
 		String emailSubject = "Reply from CourseLog";
 
 		boolean result = emailUtility.sendHTMLEmail(emailTo, emailSubject, emailBody);
-		if(result)
-		{
+		if (result) {
 			contact.setStatus(1);
 			contactRepo.save(contact);
 		}

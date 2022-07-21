@@ -25,15 +25,15 @@ public class Course implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int courseId;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 50)
 	private String courseName;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 1000)
 	private String courseDescription;
 
 	private int coursePrice;
 
-	private int courseDuration;
+	private byte courseDuration;
 
 	private Date courseDate;
 
@@ -41,8 +41,9 @@ public class Course implements Serializable {
 	@Column(length = Integer.MAX_VALUE)
 	private byte[] courseImage;
 
-	private int courseRating;
+	private double courseRating;
 
+	@Column(length = 10)
 	private String courseStatus;
 
 	@Transient
@@ -90,11 +91,11 @@ public class Course implements Serializable {
 		this.coursePrice = coursePrice;
 	}
 
-	public int getCourseDuration() {
+	public byte getCourseDuration() {
 		return courseDuration;
 	}
 
-	public void setCourseDuration(int courseDuration) {
+	public void setCourseDuration(byte courseDuration) {
 		this.courseDuration = courseDuration;
 	}
 
@@ -114,11 +115,11 @@ public class Course implements Serializable {
 		this.courseImage = courseImage;
 	}
 
-	public int getCourseRating() {
+	public double getCourseRating() {
 		return courseRating;
 	}
 
-	public void setCourseRating(int courseRating) {
+	public void setCourseRating(double courseRating) {
 		this.courseRating = courseRating;
 	}
 

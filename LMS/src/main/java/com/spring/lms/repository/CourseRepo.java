@@ -51,6 +51,6 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 					"SET c.course_rating = ?1 " +
 					"WHERE c.course_id = ?2"
 	)
-	void updateCourseRatingById(int courseRating, int courseId);
+	void updateCourseRatingById(double courseRating, int courseId);
 
 }

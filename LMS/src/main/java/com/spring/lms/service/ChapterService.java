@@ -2,6 +2,8 @@ package com.spring.lms.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.spring.lms.repository.ChaptersRepo;
 import com.spring.lms.repository.CourseRepo;
 
 @Service
+@Transactional
 public class ChapterService {
 
 	@Autowired

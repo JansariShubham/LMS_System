@@ -1,9 +1,9 @@
 package com.spring.lms.service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
+
+import javax.transaction.Transactional;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
-import com.razorpay.RazorpayException;
 import com.spring.lms.model.Enrollment;
 import com.spring.lms.repository.EnrollmentRepo;
 
 @Service
+@Transactional
 public class EnrollmentService {
 
 	@Autowired
@@ -55,7 +55,7 @@ public class EnrollmentService {
 		enrollment.setDate(LocalDateTime.now());
 		enrollment.setCourseId((int) data.get("courseId"));
 		enrollment.setUserId((int) data.get("userId"));
-		
+
 		enrollment.setPaymentId(data.get("payment_id").toString());
 
 		enrollmentRepo.save(enrollment);

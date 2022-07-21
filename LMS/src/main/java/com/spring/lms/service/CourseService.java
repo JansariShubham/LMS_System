@@ -1,29 +1,34 @@
 package com.spring.lms.service;
 
-import com.spring.lms.dto.CoursesDTO;
-import com.spring.lms.model.Course;
-import com.spring.lms.model.Tutor;
-import com.spring.lms.repository.CourseRepo;
-import com.spring.lms.repository.TutorRepo;
-import com.spring.lms.utility.NewsLetterUtility;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import com.spring.lms.dto.CoursesDTO;
+import com.spring.lms.model.Course;
+import com.spring.lms.model.Tutor;
+import com.spring.lms.repository.CourseRepo;
+import com.spring.lms.repository.TutorRepo;
+import com.spring.lms.utility.ImageUtility;
+import com.spring.lms.utility.NewsLetterUtility;
 
 @Service
+@Transactional
 public class CourseService {
 
 	@Autowired
 	private ChapterService chapterService;
-	
+
 	@Autowired
 	private CourseRepo courseRepo;
-	
+
 	@Autowired
 	private UserReviewsService userReviewsService;
 
@@ -52,23 +57,18 @@ public class CourseService {
 
 	private void sendNewsLetterUpdate(int courseId, Tutor tutor, String courseName, int coursePrice) {
 
-		String emailSubject = tutor.getUser().getFirstName() + " Added " + courseName  + " !!";
+		String emailSubject = tutor.getUser().getFirstName() + " Added " + courseName + " !!";
 
 		String link = this.hostAddress + "homepage/courses/" + courseId;
-		String emailBody
-				= 	"<div style = 'background-color:rgb(229 231 235)'>" +
-					"<h2 style = 'border:2px solid black; font-size: 2rem; padding: 0.5rem; font-weight:bold'>" +
-					courseName.toUpperCase() + " BY " + tutor.getUser().getFirstName().toUpperCase() +
-					"</h2>" +
-						"<div style = 'font-size: 1rem;'>" +
-							"<p>Checkout this course </p>" +
-							"<a href ="+ link + ">" + courseName + "</a>" +
-							"<br><br>" +
-							"<span style = 'font-weight:bold;'>Course Will Start Soon. Click Above Link For More Details.</span>" +
-							"<span style = 'font-weight:bold;'>Course Price:" + coursePrice + " Rs.</span>" +
-							"<p style='font-style:italic; font-weight:bold'>Happy Learning, <br> CourseLog.</p>" +
-						"</div>" +
-					"</div>";
+		String emailBody = "<div style = 'background-color:rgb(229 231 235)'>"
+				+ "<h2 style = 'border:2px solid black; font-size: 2rem; padding: 0.5rem; font-weight:bold'>"
+				+ courseName.toUpperCase() + " BY " + tutor.getUser().getFirstName().toUpperCase() + "</h2>"
+				+ "<div style = 'font-size: 1rem;'>" + "<p>Checkout this course </p>" + "<a href =" + link + ">"
+				+ courseName + "</a>" + "<br><br>"
+				+ "<span style = 'font-weight:bold;'>Course Will Start Soon. Click Above Link For More Details.</span>"
+				+ "<span style = 'font-weight:bold;'>Course Price:" + coursePrice + " Rs.</span>"
+				+ "<p style='font-style:italic; font-weight:bold'>Happy Learning, <br> CourseLog.</p>" + "</div>"
+				+ "</div>";
 		newsLetterUtility.sendNewsLetterUpdateEmail(emailSubject, emailBody);
 	}
 
@@ -98,7 +98,7 @@ public class CourseService {
 
 	public Course updateCourse(Course course) {
 		// TODO Auto-generated method stub
-		
+
 		int userId = course.getUserId();
 		int tutorId = tutorRepo.findTutorByUserId(userId);
 		Tutor tutor = tutorRepo.findById(tutorId).orElse(null);
@@ -125,7 +125,7 @@ public class CourseService {
 		if (courseobj.isPresent()) {
 			Course obj = courseobj.get();
 			try {
-				obj.setCourseImage(courseImage.getBytes());
+				obj.setCourseImage(ImageUtility.compressImage(courseImage));
 				courseRepo.save(obj);
 				return true;
 			} catch (Exception e) {
@@ -143,9 +143,8 @@ public class CourseService {
 		return gcCourse;
 	}
 
-
-    public void updateCourseRating(int courseRating, int courseId) {
-
+	public void updateCourseRating(double courseRating, int courseId) {
 		courseRepo.updateCourseRatingById(courseRating, courseId);
 	}
+
 }

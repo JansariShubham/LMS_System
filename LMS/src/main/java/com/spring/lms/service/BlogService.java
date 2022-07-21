@@ -3,6 +3,8 @@ package com.spring.lms.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,19 +15,17 @@ import com.spring.lms.model.User;
 import com.spring.lms.repository.BlogRepo;
 
 @Service
+@Transactional
 public class BlogService {
 
 	@Autowired
 	private BlogRepo blogRepo;
-	
-	
-	public Blog saveBlog(Blog blog) 
-	{
+
+	public Blog saveBlog(Blog blog) {
 		return blogRepo.save(blog);
 	}
 
-	public List<Blog> getBlog() 
-	{
+	public List<Blog> getBlog() {
 		return blogRepo.findAll();
 	}
 
@@ -35,19 +35,19 @@ public class BlogService {
 	}
 
 	public Blog updateBlog(Blog blog) {
-	
+
 		Blog existingData = blogRepo.findById(blog.getBlogId()).orElse(null);
 		existingData.setBlogTitle(blog.getBlogTitle());
 		existingData.setBlogBody(blog.getBlogBody());
 		existingData.setBlogDate(blog.getBlogDate());
 		return blogRepo.save(existingData);
-		
+
 	}
 
-	public  String deleteBlog(int blogId) {
+	public String deleteBlog(int blogId) {
 		// TODO Auto-generated method stub
 		blogRepo.deleteById(blogId);
-		
+
 		return null;
 	}
 

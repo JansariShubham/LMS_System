@@ -19,13 +19,13 @@ public class Contact implements Serializable {
 	@Transient
 	private String replyMessage;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 20)
 	private String name;
 	
 	@Column(unique = true)
 	private String emailId;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 200)
 	private String message;
 	
 	private int status;

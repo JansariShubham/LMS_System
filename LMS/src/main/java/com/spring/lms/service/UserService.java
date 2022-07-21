@@ -1,23 +1,27 @@
 package com.spring.lms.service;
 
-import com.spring.lms.model.Tutor;
-import com.spring.lms.model.User;
-import com.spring.lms.repository.RegistartionRepo;
-import com.spring.lms.repository.TutorRepo;
-import com.spring.lms.utility.EmailUtility;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.spring.lms.model.Tutor;
+import com.spring.lms.model.User;
+import com.spring.lms.repository.RegistartionRepo;
+import com.spring.lms.repository.TutorRepo;
+import com.spring.lms.utility.EmailUtility;
+import com.spring.lms.utility.ImageUtility;
+
 //import com.sun.org.apache.xpath.internal.operations.String;
 
 @Service
+@Transactional
 public class UserService {
 
 	@Autowired
@@ -39,8 +43,8 @@ public class UserService {
 			return null;
 		}
 		// NewsLetter Email removal if exists
-		if( newsLetterService.checkUserExistsInNewsLetter( user.getEmailId().trim() ) ){
-			newsLetterService.removeUserFromNewsLetter( user.getEmailId().trim() );
+		if (newsLetterService.checkUserExistsInNewsLetter(user.getEmailId().trim())) {
+			newsLetterService.removeUserFromNewsLetter(user.getEmailId().trim());
 		}
 		return repo.save(user);
 	}
@@ -187,7 +191,7 @@ public class UserService {
 		if (userObj.isPresent()) {
 			User obj = userObj.get();
 			try {
-				obj.setProfileImage(profileImage.getBytes());
+				obj.setProfileImage(ImageUtility.compressImage(profileImage));
 				repo.save(obj);
 				return true;
 			} catch (Exception e) {
@@ -200,14 +204,14 @@ public class UserService {
 			return false;
 	}
 
-	public List<String> listAllUserEmailFromUser(){
+	public List<String> listAllUserEmailFromUser() {
 		return repo.getAllEmailAddressFromUserData();
 	}
 
-	public String getFullNameOfUser(int userId){
+	public String getFullNameOfUser(int userId) {
 
 		List<List<String>> firstAndLastName = repo.getUserNameUsingId(userId);
-		if(firstAndLastName.size() != 0){
+		if (firstAndLastName.size() != 0) {
 			String firstName = firstAndLastName.get(0).get(0);
 			String lastName = firstAndLastName.get(0).get(1);
 			return (firstName + " " + lastName);
