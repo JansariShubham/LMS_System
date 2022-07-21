@@ -11,11 +11,11 @@ public class GenerateOTP {
 
 	@Value("0123456789")
 	private String numbers;
-	@Autowired
+	
 	private Random random;
 	
 	public String generateOTP(int length) {
-		
+		this.random = new Random();
 		char otp[] = new char[length];
 		for(int i = 0;i<length;i++) {
 			otp[i] = numbers.charAt(random.nextInt(numbers.length()));
