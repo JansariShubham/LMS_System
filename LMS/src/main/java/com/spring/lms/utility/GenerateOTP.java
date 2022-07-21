@@ -20,8 +20,8 @@ public class GenerateOTP {
 		for(int i = 0;i<length;i++) {
 			otp[i] = numbers.charAt(random.nextInt(numbers.length()));
 		}
-		return otp.toString();
 		
+		return new String(otp);
 	}
 
 }

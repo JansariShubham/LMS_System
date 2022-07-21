@@ -242,9 +242,29 @@ public class UserService {
 		
 		String otp = this.genrateOTP.generateOTP(6);
 		String emailTo = data.get("emailId");
+		String userName = data.get("firstName")+" "+data.get("lastName");
 		String emailSubject = "Registration OTP from Itaims";
-		String emailBody = "Registration OTP is : " + otp;
-		this.emailUtility.sendTextEmail(emailTo, emailSubject, emailBody);
-		return otp;
+		String emailBody = "<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2\'>"
+							+ "  <div style=\"margin:10px 0;width:70%;padding:5px 0\">"
+							+ "<div style=\"border-bottom:1px solid #eee\">"
+							+ "<a href=\"\" style=\"font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600\">Courselog</a>\r\n"
+							+ "</div>"
+							+"<p style=\"font-size:1.1em\">Hi, "+userName+"</p>"
+							+"<p>Thank you for choosing Courselog. Use the following OTP to complete your Sign Up procedures.</p>"
+							+"<h2 style=\"background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;\">"+otp+"</h2>"
+							+"<p style=\"font-size:0.9em;\">Regards,<br />Courselog</p>"
+							+"<hr style=\"border:none;border-top:1px solid #eee\" />"
+							+"<div style=\"float:right;padding:8px 0;color:#aaa;font-size:1em;line-height:1;font-weight:300\">"
+							+"<p>ITAIMS</p>\r\n" 
+							+"<p>City Center 2, 605, Science City</p>\r\n" 
+							+"<p>Ahmedabad, Gujarat 380060</p>"
+							+"</div>\r\n" + 
+							"  </div>\r\n" + 
+							"</div>";
+		boolean result = this.emailUtility.sendHTMLEmail(emailTo, emailSubject, emailBody);
+		if(result) {
+			return otp;
+		}
+		return null;
 	}
 }

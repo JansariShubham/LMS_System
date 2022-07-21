@@ -3,6 +3,7 @@ package com.spring.lms.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,8 @@ public class RegistrationController {
 	UserService userService;
 	
 	@PostMapping("/register/sendotp")
-	public String sendOTP(@RequestBody Map<String,String> data) {
-		return this.userService.sendOTP(data);
+	public ResponseEntity<String> sendOTP(@RequestBody Map<String,String> data) {
+		return ResponseEntity.ok(this.userService.sendOTP(data));
 	}
 	
 	@PostMapping("/register")
