@@ -1,5 +1,7 @@
 package com.spring.lms.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,12 @@ public class RegistrationController {
 			
 	@Autowired
 	UserService userService;
+	
+	@PostMapping("/register/sendotp")
+	public String sendOTP(@RequestBody Map<String,String> data) {
+		this.userService.sendOTP(data);
+		return null;
+	}
 	
 	@PostMapping("/register")
 	public User register(@RequestBody User user)

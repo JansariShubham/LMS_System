@@ -3,6 +3,7 @@ package com.spring.lms.service;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,7 @@ import com.spring.lms.model.User;
 import com.spring.lms.repository.RegistartionRepo;
 import com.spring.lms.repository.TutorRepo;
 import com.spring.lms.utility.EmailUtility;
+import com.spring.lms.utility.GenerateOTP;
 import com.spring.lms.utility.ImageUtility;
 
 //import com.sun.org.apache.xpath.internal.operations.String;
@@ -35,7 +37,9 @@ public class UserService {
 
 	@Autowired
 	private NewsLetterService newsLetterService;
-
+	
+	@Autowired
+	private GenerateOTP genrateOTP;
 	public User signUp(User user) {
 
 		if (repo.findByEmailId(user.getEmailId()) != null) {
@@ -217,5 +221,12 @@ public class UserService {
 			return (firstName + " " + lastName);
 		}
 		return null;
+	}
+
+	public String sendOTP(Map<String, String> data) {
+		
+		String otp = this.genrateOTP.generateOTP(6);
+		
+		return otp;
 	}
 }
