@@ -55,7 +55,7 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 
 	@Query("SELECT c.courseId from Course c " + 
 					"inner join Tutor t on (t.tutor_id = c.tutor)" + 
-					"where t.user = 2")
+					"where t.user.user_id = :id")
 	Optional<List<Integer>> getMyCourses(int id);
 
 }

@@ -76,9 +76,8 @@ public class UserService {
 				}
 				else if(tempUser.getRole().equalsIgnoreCase("tutor")){
 					Optional<List<Integer>> list = this.courseService.getMyCourses(tempUser.getUser_id());
-					if(list.isPresent()) {
+					if(list.isPresent())
 						tempUser.setMyCourses(list.get());
-					}
 				}
 			}
 		} else {
