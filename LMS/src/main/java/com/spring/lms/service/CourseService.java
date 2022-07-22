@@ -147,8 +147,7 @@ public class CourseService {
 		courseRepo.updateCourseRatingById(courseRating, courseId);
 	}
 	
-//	public Optional<int[]> getMyCourses(int id){
-//		
-//	}
-
+	public Optional<List<Integer>> getMyCourses(int id){
+		return this.courseRepo.getMyCourses(id);
+	}
 }

@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.lms.model.Tutor;
 import com.spring.lms.model.User;
-import com.spring.lms.repository.EnrollmentRepo;
 import com.spring.lms.repository.RegistartionRepo;
 import com.spring.lms.repository.TutorRepo;
 import com.spring.lms.utility.EmailUtility;
@@ -45,6 +44,9 @@ public class UserService {
 	@Autowired
 	private EnrollmentService enrollmentService;
 	
+	@Autowired
+	private CourseService courseService;
+	
 	public User signUp(User user) {
 
 		if (repo.findByEmailId(user.getEmailId()) != null) {
@@ -73,7 +75,10 @@ public class UserService {
 						tempUser.setMyCourses(list.get());
 				}
 				else if(tempUser.getRole().equalsIgnoreCase("tutor")){
-					
+					Optional<List<Integer>> list = this.courseService.getMyCourses(tempUser.getUser_id());
+					if(list.isPresent()) {
+						tempUser.setMyCourses(list.get());
+					}
 				}
 			}
 		} else {
