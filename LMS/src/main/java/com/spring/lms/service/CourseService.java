@@ -44,27 +44,27 @@ public class CourseService {
 		User user = userService.getUserDataById(course.getUserId());
 		course.setUser(user);
 
-//		sendNewsLetterUpdate(course.getCourseId(), course.getTutor(), course.getCourseName(), course.getCoursePrice());
+		sendNewsLetterUpdate(course.getCourseId(), user, course.getCourseName(), course.getCoursePrice());
 
 		return courseRepo.save(course);
 	}
 
-//	private void sendNewsLetterUpdate(int courseId, Tutor tutor, String courseName, int coursePrice) {
+	private void sendNewsLetterUpdate(int courseId, User tutor, String courseName, int coursePrice) {
+
+		String emailSubject = tutor.getFirstName() + " Added " + courseName + " !!";
 //
-//		String emailSubject = tutor.getUser().getFirstName() + " Added " + courseName + " !!";
-//
-//		String link = this.hostAddress + "homepage/courses/" + courseId;
-//		String emailBody = "<div style = 'background-color:rgb(229 231 235)'>"
-//				+ "<h2 style = 'border:2px solid black; font-size: 2rem; padding: 0.5rem; font-weight:bold'>"
-//				+ courseName.toUpperCase() + " BY " + tutor.getUser().getFirstName().toUpperCase() + "</h2>"
-//				+ "<div style = 'font-size: 1rem;'>" + "<p>Checkout this course </p>" + "<a href =" + link + ">"
-//				+ courseName + "</a>" + "<br><br>"
-//				+ "<span style = 'font-weight:bold;'>Course Will Start Soon. Click Above Link For More Details.</span>"
-//				+ "<span style = 'font-weight:bold;'>Course Price:" + coursePrice + " Rs.</span>"
-//				+ "<p style='font-style:italic; font-weight:bold'>Happy Learning, <br> CourseLog.</p>" + "</div>"
-//				+ "</div>";
-//		newsLetterUtility.sendNewsLetterUpdateEmail(emailSubject, emailBody);
-//	}
+		String link = this.hostAddress + "homepage/courses/" + courseId;
+		String emailBody = "<div style = 'background-color:rgb(229 231 235)'>"
+				+ "<h2 style = 'border:2px solid black; font-size: 2rem; padding: 0.5rem; font-weight:bold'>"
+				+ courseName.toUpperCase() + " BY " + tutor.getFirstName().toUpperCase() + "</h2>"
+				+ "<div style = 'font-size: 1rem;'>" + "<p>Checkout this course </p>" + "<a href =" + link + ">"
+				+ courseName + "</a>" + "<br><br>"
+				+ "<span style = 'font-weight:bold;'>Course Will Start Soon. Click Above Link For More Details.</span>"
+				+ "<span style = 'font-weight:bold;'>Course Price:" + coursePrice + " Rs.</span>"
+				+ "<p style='font-style:italic; font-weight:bold'>Happy Learning, <br> CourseLog.</p>" + "</div>"
+				+ "</div>";
+		newsLetterUtility.sendNewsLetterUpdateEmail(emailSubject, emailBody);
+	}
 
 	public List<CoursesDTO> getCourses() {
 		// TODO Auto-generated method stub
