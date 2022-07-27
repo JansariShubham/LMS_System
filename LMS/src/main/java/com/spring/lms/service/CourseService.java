@@ -52,7 +52,7 @@ public class CourseService {
 	private void sendNewsLetterUpdate(int courseId, User tutor, String courseName, int coursePrice) {
 
 		String emailSubject = tutor.getFirstName() + " Added " + courseName + " !!";
-		
+
 		String link = this.hostAddress + "homepage/courses/" + courseId;
 		String emailBody = "<div style = 'background-color:rgb(229 231 235)'>"
 				+ "<h2 style = 'border:2px solid black; font-size: 2rem; padding: 0.5rem; font-weight:bold'>"
