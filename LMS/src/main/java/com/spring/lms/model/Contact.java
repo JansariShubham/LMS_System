@@ -25,7 +25,7 @@ public class Contact implements Serializable {
 	@Column(unique = true)
 	private String emailId;
 	
-	@Column(nullable = false, length = 200)
+	@Column(nullable = false, length = 300)
 	private String message;
 	
 	private int status;

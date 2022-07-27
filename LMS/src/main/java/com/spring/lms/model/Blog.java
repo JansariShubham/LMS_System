@@ -17,7 +17,7 @@ public class Blog implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int blogId;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 200)
 	private String blogTitle;
 
 	@Column(nullable = false)

@@ -11,7 +11,7 @@ public class UserReviews implements Serializable
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int reviewId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1)
     private int courseRating;
 
     @Column(nullable = false)
