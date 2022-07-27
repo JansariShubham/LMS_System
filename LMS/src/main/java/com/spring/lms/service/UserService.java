@@ -185,8 +185,12 @@ public class UserService {
 
 	public String sendOTP(Map<String, String> data) {
 
-		String otp = this.genrateOTP.generateOTP(6);
 		String emailTo = data.get("emailId");
+		if (repo.findByEmailId(emailTo) != null) {
+			return null;
+		}
+		String otp = this.genrateOTP.generateOTP(6);
+		
 		String userName = data.get("firstName") + " " + data.get("lastName");
 		String emailSubject = "Registration OTP from Itaims";
 		String emailBody = "<div style='font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2\'>"
