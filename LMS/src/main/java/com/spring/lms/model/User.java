@@ -1,15 +1,14 @@
 package com.spring.lms.model;
 
 import java.util.List;
-
 import javax.persistence.*;
-//import javax.persistence.CascadeType;
+import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int user_id;
+	private int userId;
 
 	@Column(nullable = false, length = 20)
 	private String firstName;
@@ -28,24 +27,23 @@ public class User {
 
 	@Column(nullable = true, length = 10)
 	private String phoneNum;
-		
+
+	private boolean status;
+
 	@Transient
 	private boolean emailError;
 	@Transient
 	private boolean passwordError;
 	@Transient
-	private boolean userError;
+	private boolean statusError;
 
 	@Lob
 	@Column(name = "profile_image", length = Integer.MAX_VALUE)
 	byte[] profileImage;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-	private Tutor tutor;
-
 	@Transient
 	private List<Integer> myCourses;
-	
+
 	public List<Integer> getMyCourses() {
 		return myCourses;
 	}
@@ -78,12 +76,12 @@ public class User {
 		this.passwordError = passwordError;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
@@ -132,5 +130,21 @@ public class User {
 
 	public void setProfileImage(byte[] profileImage) {
 		this.profileImage = profileImage;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public boolean isStatusError() {
+		return statusError;
+	}
+
+	public void setStatusError(boolean statusError) {
+		this.statusError = statusError;
 	}
 }

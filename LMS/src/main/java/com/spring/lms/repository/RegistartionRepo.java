@@ -22,7 +22,7 @@ public interface RegistartionRepo extends JpaRepository<User, Integer> {
 	List<String> getAllEmailAddressFromUserData();
 
 	@Query(
-			"SELECT u.firstName, u.lastName FROM User as u WHERE u.user_id = ?1"
+			"SELECT u.firstName, u.lastName FROM User as u WHERE u.userId = ?1"
 	)
 	List<List<String>> getUserNameUsingId(int id);
 }

@@ -30,7 +30,6 @@ public class CourseController {
 	@PostMapping("/course")
 	public Course saveCourse(@RequestBody Course course) {
 		return courseService.saveCourse(course);
-		// System.out.println(course.getChapters());
 	}
 
 	@GetMapping("/course")
@@ -42,12 +41,6 @@ public class CourseController {
 	public CoursesDTO getCourse(@PathVariable int courseId) {
 		return courseService.getCourse(courseId);
 	}
-
-//	@GetMapping("/course/{courseName}")
-//	public Course getCourseByName(@PathVariable String courseName)
-//	{
-//		return courseService.getCourseByName(courseName);
-//	}
 
 	@PutMapping("/course")
 	public Course updateCourse(@RequestBody Course course) {

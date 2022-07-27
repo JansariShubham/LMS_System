@@ -20,16 +20,14 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 
 	Course findBycourseName(String courseName);
 	
-	@Query("SELECT new com.spring.lms.dto.CoursesDTO(c.courseId, c.courseName, c.courseDescription, c.coursePrice, c.courseDuration, c.courseDate, c.courseImage, c.courseRating, c.courseStatus, u.user_id, u.firstName, u.lastName, u.profileImage) "
+	@Query("SELECT new com.spring.lms.dto.CoursesDTO(c.courseId, c.courseName, c.courseDescription, c.coursePrice, c.courseDuration, c.courseDate, c.courseImage, c.courseRating, c.courseStatus, u.userId, u.firstName, u.lastName, u.profileImage) "
 			+ "FROM Course as c "
-			+ "INNER JOIN Tutor as t ON (c.tutor = t.tutor_id) "
-			+ "INNER JOIN User as u ON (t.user = u.user_id)")
+			+ "INNER JOIN User as u ON (c.user.userId = u.userId)")
 	List<CoursesDTO> getCourses();
 	
-	@Query("SELECT new com.spring.lms.dto.CoursesDTO(c.courseId, c.courseName, c.courseDescription, c.coursePrice, c.courseDuration, c.courseDate, c.courseImage, c.courseRating, c.courseStatus, u.user_id, u.firstName, u.lastName, u.profileImage) "
+	@Query("SELECT new com.spring.lms.dto.CoursesDTO(c.courseId, c.courseName, c.courseDescription, c.coursePrice, c.courseDuration, c.courseDate, c.courseImage, c.courseRating, c.courseStatus, u.userId, u.firstName, u.lastName, u.profileImage) "
 			+ " FROM Course as c"
-			+ " INNER JOIN Tutor as t ON (c.tutor = t.tutor_id)"
-			+ " INNER JOIN User as u ON (t.user = u.user_id)"
+			+ " INNER JOIN User as u ON (c.user.userId = u.userId)"
 			+ " WHERE c.courseId = :courseId")
 	CoursesDTO getCourse(int courseId);
 
@@ -53,9 +51,6 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 	)
 	void updateCourseRatingById(double courseRating, int courseId);
 
-	@Query("SELECT c.courseId from Course c " + 
-					"inner join Tutor t on (t.tutor_id = c.tutor)" + 
-					"where t.user.user_id = :id")
-	Optional<List<Integer>> getMyCourses(int id);
-
+	@Query("SELECT courseId from Course where user.userId = :userId")
+	Optional<List<Integer>> getMyCourses(int userId);
 }

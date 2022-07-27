@@ -40,7 +40,6 @@ public class EnrollmentService {
 	}
 
 	public String updateOrder(Map<String, Object> data) {
-		// TODO Auto-generated method stub
 		Enrollment enrollment = new Enrollment();
 		enrollment.setOrderId(data.get("order_id").toString());
 		enrollment.setDate(LocalDateTime.now());
@@ -51,7 +50,7 @@ public class EnrollmentService {
 		enrollmentRepo.save(enrollment);
 		return null;
 	}
-	public Optional<List<Integer>> getMyCourses(int id) {
-		return enrollmentRepo.getMyCourses(id);
+	public Optional<List<Integer>> getMyCourses(int userId) {
+		return enrollmentRepo.getMyCourses(userId);
 	}
 }

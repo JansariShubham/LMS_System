@@ -19,7 +19,7 @@ public class ImageUtility {
         float quality = 0.3f;
         String imageName = mpFile.getOriginalFilename();
         String imageExtension = imageName.substring(imageName.lastIndexOf(".") + 1);
-        if(imageExtension.equals("png"))
+        if(!imageExtension.equals("jpg") && !imageExtension.equals("jpeg"))
 			try {
 				return mpFile.getBytes();
 			} catch (IOException e1) {
