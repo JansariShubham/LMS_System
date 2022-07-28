@@ -19,13 +19,13 @@ public class ImageUtility {
         float quality = 0.3f;
         String imageName = mpFile.getOriginalFilename();
         String imageExtension = imageName.substring(imageName.lastIndexOf(".") + 1);
-        if(!imageExtension.equals("jpg") && !imageExtension.equals("jpeg"))
+        if(!imageExtension.equals("jpg") && !imageExtension.equals("jpeg")) {
 			try {
 				return mpFile.getBytes();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+        }
         // Returns an Iterator containing all currently registered ImageWriters that claim to be able to encode the named format.
         // You don't have to register one yourself; some are provided.
         ImageWriter imageWriter = ImageIO.getImageWritersByFormatName(imageExtension).next();
