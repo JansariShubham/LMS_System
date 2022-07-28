@@ -27,10 +27,14 @@ public class UserController {
 	}
 	
 	@DeleteMapping({"/user/{user_id}", "/tutor/{user_id}"})
-	public User deleteUser(@PathVariable int user_id){
+	public String deleteUser(@PathVariable int user_id){
 		return userService.deleteUserData(user_id);
 	}
 	
+	@GetMapping("/unblock-user/{user_id}")
+	public String unblockUser(@PathVariable int user_id) {
+		return userService.unblockUser(user_id);
+	}
 	
 	@PutMapping({"/user", "/tutor"})
 	public User updateUser(@RequestBody User user){
@@ -43,6 +47,8 @@ public class UserController {
 		Boolean isUserExists = userService.isUserExistsWithEmail(userEmail);
 		return isUserExists;
 	}
+	
+	
 	
 	@PostMapping("/tutor")
 	public User addTutor(@RequestBody User user) throws IOException {

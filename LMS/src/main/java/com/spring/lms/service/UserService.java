@@ -89,10 +89,18 @@ public class UserService {
 		return repo.save(existingUser);
 	}
 
-	public User deleteUserData(int user_id) {
+	public String deleteUserData(int user_id) {
 		Optional<User> user = repo.findById(user_id);
 		if(user.isPresent()) {
 			user.get().setStatus(false);
+			repo.save(user.get());			
+		}
+		return null;
+	}
+	public String unblockUser(int user_id) {
+		Optional<User> user = repo.findById(user_id);
+		if(user.isPresent()) {
+			user.get().setStatus(true);
 			repo.save(user.get());			
 		}
 		return null;
