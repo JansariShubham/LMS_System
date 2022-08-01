@@ -2,6 +2,7 @@ package com.spring.lms.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -58,5 +59,11 @@ public class CourseController {
 			throws IOException {
 		System.out.println("\nUpload course  image called....\n");
 		return courseService.savecourseImage(id, courseImage);
+	}
+	
+	@GetMapping("/getTutorCourses/{user_id}")
+	public List<Course> getTutorCourses(@PathVariable int user_id)
+	{
+		return courseService.getTutorCourses(user_id);
 	}
 }

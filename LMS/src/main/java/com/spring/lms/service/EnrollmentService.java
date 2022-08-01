@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.spring.lms.model.Enrollment;
+import com.spring.lms.model.User;
 import com.spring.lms.repository.EnrollmentRepo;
+import com.spring.lms.repository.RegistartionRepo;
 
 @Service
 @Transactional
@@ -22,6 +24,9 @@ public class EnrollmentService {
 
 	@Autowired
 	private EnrollmentRepo enrollmentRepo;
+	
+	@Autowired
+	private RegistartionRepo userRepo;
 
 	public String createOrder(Map<String, Object> data) throws Exception {
 		int amount = Integer.parseInt(data.get("amount").toString());
@@ -52,5 +57,14 @@ public class EnrollmentService {
 	}
 	public Optional<List<Integer>> getMyCourses(int userId) {
 		return enrollmentRepo.getMyCourses(userId);
+	}
+
+	public List<User> getEnrolledUsers(int course_id) {
+		// TODO Auto-generated method stub
+		List<Integer> enrolledUserId = enrollmentRepo.getUserIdByCourseId(course_id);
+		System.out.println("ENROLLED USERS: " + enrolledUserId);
+		List<User> enrolledUsers = userRepo.findAllById(enrolledUserId);
+		return enrolledUsers;
+		
 	}
 }

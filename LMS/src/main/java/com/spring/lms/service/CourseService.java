@@ -130,4 +130,11 @@ public class CourseService {
 	public Optional<List<Integer>> getMyCourses(int userId){
 		return this.courseRepo.getMyCourses(userId);
 	}
+
+	public List<Course> getTutorCourses(int user_id) {
+		// TODO Auto-generated method stub
+		List<Integer> courseId =  courseRepo.getMyCourses(user_id).orElse(null);
+		System.out.println("COURSE ID:::::->>>" + courseId);
+		return courseRepo.findAllById(courseId);
+	}
 }
