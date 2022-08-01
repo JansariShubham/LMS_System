@@ -24,7 +24,7 @@ public class CourseService {
 
 	@Autowired
 	private ChapterService chapterService;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -87,7 +87,7 @@ public class CourseService {
 	public Course updateCourse(Course course) {
 		User user = userService.getUserDataById(course.getUserId());
 		Course existingCourse = courseRepo.findById(course.getCourseId()).orElse(null);
-		
+
 		existingCourse.setCourseName(course.getCourseName());
 		existingCourse.setCourseDescription(course.getCourseDescription());
 		existingCourse.setCoursePrice(course.getCoursePrice());
@@ -126,15 +126,14 @@ public class CourseService {
 	public void updateCourseRating(double courseRating, int courseId) {
 		courseRepo.updateCourseRatingById(courseRating, courseId);
 	}
-	
-	public Optional<List<Integer>> getMyCourses(int userId){
+
+	public Optional<List<Integer>> getMyCourses(int userId) {
 		return this.courseRepo.getMyCourses(userId);
 	}
 
 	public List<Course> getTutorCourses(int user_id) {
 		// TODO Auto-generated method stub
-		List<Integer> courseId =  courseRepo.getMyCourses(user_id).orElse(null);
-		System.out.println("COURSE ID:::::->>>" + courseId);
+		List<Integer> courseId = courseRepo.getMyCourses(user_id).orElse(null);
 		return courseRepo.findAllById(courseId);
 	}
 }

@@ -53,7 +53,7 @@ public interface CourseRepo extends JpaRepository<Course, Integer>{
 
 	@Query("SELECT courseId from Course where user.userId = :userId")
 	Optional<List<Integer>> getMyCourses(int userId);
-
-	@Query("SELECT courseId from Course where user.userId = :user_id")
-	List<Course> findCourseIdByUserId(int user_id);
+//
+//	@Query("SELECT courseId from Course where user.userId = :user_id")
+//	List<Course> findCourseIdByUserId(int user_id);
 }
