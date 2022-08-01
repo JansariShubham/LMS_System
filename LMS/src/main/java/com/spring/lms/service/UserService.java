@@ -198,6 +198,7 @@ public class UserService {
 			return null;
 		}
 		String otp = this.genrateOTP.generateOTP(6);
+		System.out.println(otp);
 		
 		String userName = data.get("firstName") + " " + data.get("lastName");
 		String emailSubject = "Registration OTP from Itaims";
